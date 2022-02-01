@@ -80,7 +80,7 @@ function displayTeams(teams, bestOf) {
 const isOverflown = ({ clientWidth, scrollWidth }) => scrollWidth > clientWidth
 
 const resizeText = ( parent ) => {
-  let i = 25 // let's start with 12px
+  let i = 20 // let's start with 12px
   let overflow = false
   const maxSize = 65 // very huge text size
 
