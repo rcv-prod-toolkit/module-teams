@@ -122,6 +122,9 @@ function displayBestOF(match) {
   matchDiv.appendChild(redTeamDiv)
 
   container.appendChild(matchDiv)
+
+  resizeText(blueTag)
+  resizeText(redTag)
 }
 
 function displayShards(points) {
@@ -139,4 +142,21 @@ function displayShards(points) {
   }
 
   return shardsDiv
+}
+
+const isOverflown = ({ clientWidth, scrollWidth }) => scrollWidth > clientWidth
+
+const resizeText = ( parent ) => {
+  let i = 20 // let's start with 12px
+  let overflow = false
+  const maxSize = 75 // very huge text size
+
+  while (!overflow && i < maxSize) {
+    parent.style.fontSize = `${i}px`
+    overflow = isOverflown(parent)
+    if (!overflow) i++
+  }
+
+  // revert to last state where no overflow happened:
+  parent.style.fontSize = `${i - 1}px`
 }
