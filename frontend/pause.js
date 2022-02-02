@@ -61,6 +61,9 @@ function displaySingle(match) {
   matchDiv.appendChild(redTag)
 
   container.appendChild(matchDiv)
+
+  resizeText(blueTag)
+  resizeText(redTag)
 }
 
 function displayBestOF(match) {
