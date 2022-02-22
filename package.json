@@ -1,8 +1,8 @@
 {
-  "name": "rcv-teams",
+  "name": "module-teams",
   "version": "1.0.0",
   "description": "Module that provides GFX elements for the current teams",
-  "author": "Himyu",
+  "author": "RCVolus",
   "license": "MIT",
   "toolkit": {
     "modes": [
@@ -14,10 +14,10 @@
     "needsBuild": true
   },
   "dependencies": {
-    "date-fns": "^2.22.1",
-    "league-prod-toolkit": "file:../.."
+    "date-fns": "^2.22.1"
   },
   "devDependencies": {
+    "rcv-prod-toolkit-types": "^1.0.1",
     "typescript": "^4.3.2"
   },
   "scripts": {
