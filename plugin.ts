@@ -1,4 +1,4 @@
-import type { PluginContext } from 'rcv-prod-toolkit-types'
+import type { PluginContext } from '@rcv-prod-toolkit/types'
 import type { GfxState } from './types/GfxState'
 import util from 'util';
 import endOfDay from 'date-fns/endOfDay'
