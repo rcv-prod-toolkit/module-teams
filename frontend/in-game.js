@@ -97,7 +97,7 @@ const isOverflown = ({ clientWidth, scrollWidth }) => scrollWidth > clientWidth
 const resizeText = ( parent ) => {
   let i = 20 // let's start with 12px
   let overflow = false
-  const maxSize = 45 // very huge text size
+  const maxSize = 40 // very huge text size
 
   while (!overflow && i < maxSize) {
     parent.style.fontSize = `${i}px`

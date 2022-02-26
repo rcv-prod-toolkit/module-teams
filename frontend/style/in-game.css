@@ -45,12 +45,12 @@
 }
 
 #blue-tag {
-  right: 72.5%;
+  right: 77%;
   transform: translateX(50%);
 }
 
 #red-tag {
-  left: 73%;
+  left: 77.7%;
   transform: translateX(-50%);
 }
 
@@ -74,12 +74,12 @@
 }
 
 #blue-score {
-  transform: translateX(-520px);
+  transform: translateX(-615px);
   margin-top: -3px;
 }
 
 #red-score {
-  transform: translateX(530px);
+  transform: translateX(628px);
   /* margin-top: -33px; */
   margin-top: -3px;
 }
