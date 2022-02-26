@@ -96,16 +96,19 @@ h2 {
   display: inline-block;
   border-radius: 5px;
   border: 3px solid var(--background-color);
+  opacity: 0.15;
 }
 
 .shards.blue .shard.full {
   background-color: var(--blue-team);
   border-color: var(--blue-team);
+  opacity: 1;
 }
 
 .shards.red .shard.full {
   background-color: var(--red-team);
   border-color: var(--red-team);
+  opacity: 1;
 }
 
 .shards.red {
