@@ -37,7 +37,6 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 500px;
 }
 
 .match:not(:last-child) {
@@ -58,7 +57,6 @@ h2 {
   color: var(--accent-color);
   text-transform: uppercase;
   text-align: center;
-  width: 120px;
   font-weight: bold;
   margin: 0 50px;
   line-height: 1;
@@ -90,23 +88,27 @@ h2 {
   display: flex;
   width: 100%;
   justify-content: space-between;
+  gap: 15px;
 }
 
 .shard {
-  width: 40px;
-  height: 40px;
+  flex-grow: 1;
+  display: inline-block;
   border-radius: 5px;
   border: 3px solid var(--background-color);
+  opacity: 0.15;
 }
 
 .shards.blue .shard.full {
   background-color: var(--blue-team);
   border-color: var(--blue-team);
+  opacity: 1;
 }
 
 .shards.red .shard.full {
   background-color: var(--red-team);
   border-color: var(--red-team);
+  opacity: 1;
 }
 
 .shards.red {

@@ -67,8 +67,6 @@ function displaySingle(match) {
 }
 
 function displayBestOF(match) {
-  console.log(match)
-
   const matchDiv = document.createElement('div')
   matchDiv.classList.add('match')
 
@@ -87,7 +85,7 @@ function displayBestOF(match) {
   }
   blueTag.innerText = blueTeam.tag
 
-  const blueShards = displayShards(parseInt(blueTeam.score))
+  const blueShards = displayShards(parseInt(blueTeam.score), match.bestOf)
   blueShards.classList.add('blue')
   if (parseInt(redTeam.score) > parseInt(match.bestOf) / 2) {
     blueShards.classList.add('outline')
@@ -107,7 +105,7 @@ function displayBestOF(match) {
   }
   redTag.innerText = redTeam.tag
 
-  const redShards = displayShards(parseInt(redTeam.score))
+  const redShards = displayShards(parseInt(redTeam.score), match.bestOf)
   redShards.classList.add('red')
   if (parseInt(blueTeam.score) > parseInt(match.bestOf) / 2) {
     redShards.classList.add('outline')
@@ -130,11 +128,11 @@ function displayBestOF(match) {
   resizeText(redTag)
 }
 
-function displayShards(points) {
+function displayShards(points, bestOf = 3) {
   const shardsDiv = document.createElement('div')
   shardsDiv.classList.add('shards')
 
-  for (const i of [1,2,3]) {
+  for (const i of Array(Math.ceil(bestOf / 2))) {
     const shard = document.createElement('div')
     shard.classList.add('shard')
     if (points > 0) {
