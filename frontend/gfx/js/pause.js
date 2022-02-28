@@ -1,10 +1,12 @@
+const namespace = 'module-teams'
+
 const container = document.querySelector('#container')
 
 const tick = async () => {
   const res = await window.LPTE.request({
     meta: {
       type: 'request-matches-of-the-day',
-      namespace: 'rcv-teams',
+      namespace,
       version: 1
     },
   });

@@ -4,8 +4,6 @@ import util from 'util';
 import endOfDay from 'date-fns/endOfDay'
 import startOfDay from 'date-fns/startOfDay'
 
-const namespace = 'rcv-teams';
-
 const initialState : GfxState = {
   state: "NO_MATCH",
   teams: {},
@@ -14,6 +12,8 @@ const initialState : GfxState = {
 }
 
 module.exports = async (ctx: PluginContext) => {
+  const namespace = ctx.plugin.module.getName();
+
   let gfxState = initialState;
 
   // Register new UI page
@@ -24,9 +24,9 @@ module.exports = async (ctx: PluginContext) => {
       version: 1
     },
     pages: [{
-      name: 'OP: rcv-teams',
+      name: `OP: ${namespace}`,
       frontend: 'frontend',
-      id : 'op-rcv-teams'
+      id : `op-${namespace}`
     }]
   });
 
@@ -225,6 +225,107 @@ module.exports = async (ctx: PluginContext) => {
       teams: gfxState.teams,
       bestOf: gfxState.bestOf,
       roundOf: gfxState.roundOf
+    });
+  });
+
+  ctx.LPTE.on(namespace, 'delete-team', async (e: any) => {
+    await ctx.LPTE.request({
+      meta: {
+        type: 'deleteOne',
+        namespace: 'database',
+        version: 1
+      },
+      collection: 'teams',
+      id: e._id
+    });
+
+    const res = await ctx.LPTE.request({
+      meta: {
+        type: 'request',
+        namespace: 'database',
+        version: 1
+      },
+      collection: 'teams',
+      limit: 30
+    })
+
+    if (res === undefined) {
+      return ctx.log.warn('teams could not be loaded')
+    }
+
+    ctx.LPTE.emit({
+      meta: {
+        type: 'update-teams-set',
+        namespace,
+        version: 1
+      },
+      teams: res.data
+    });
+  });
+
+  ctx.LPTE.on(namespace, 'add-team', async (e: any) => {
+    await ctx.LPTE.request({
+      meta: {
+        type: 'insertOne',
+        namespace: 'database',
+        version: 1
+      },
+      collection: 'team',
+      data: {
+        logo: e.logo,
+        name: e.name,
+        tag: e.tag,
+        color: e.color,
+        standing: e.standing,
+      }
+    });
+
+    const res = await ctx.LPTE.request({
+      meta: {
+        type: 'request',
+        namespace: 'database',
+        version: 1
+      },
+      collection: 'teams',
+      limit: 30
+    })
+
+    if (res === undefined) {
+      return ctx.log.warn('teams could not be loaded')
+    }
+
+    ctx.LPTE.emit({
+      meta: {
+        type: 'update-teams-set',
+        namespace,
+        version: 1
+      },
+      teams: res.data
+    });
+  });
+
+  ctx.LPTE.on(namespace, 'request-teams', async (e: any) => {
+    const res = await ctx.LPTE.request({
+      meta: {
+        type: 'request',
+        namespace: 'database',
+        version: 1
+      },
+      collection: 'teams',
+      limit: 30
+    })
+
+    if (res === undefined) {
+      return ctx.log.warn('teams could not be loaded')
+    }
+
+    ctx.LPTE.emit({
+      meta: {
+        type: e.meta.reply,
+        namespace: 'reply',
+        version: 1
+      },
+      teams: res.data
     });
   });
 

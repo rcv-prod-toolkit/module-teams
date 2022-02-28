@@ -1,3 +1,5 @@
+const namespace = 'module-teams'
+
 const tagContainer = document.querySelector('#tag-container')
 const blueTag = document.querySelector('#blue-tag')
 const redTag = document.querySelector('#red-tag')
@@ -10,7 +12,7 @@ const redScore = document.querySelector('#red-score')
 const tick = async () => {
   const data = await this.LPTE.request({
     meta: {
-      namespace: 'rcv-teams',
+      namespace,
       type: 'request-current',
       version: 1
     }
