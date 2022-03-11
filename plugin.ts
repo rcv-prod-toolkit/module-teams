@@ -235,7 +235,7 @@ module.exports = async (ctx: PluginContext) => {
         namespace: 'database',
         version: 1
       },
-      collection: 'teams',
+      collection: 'team',
       id: e._id
     });
 
@@ -245,7 +245,7 @@ module.exports = async (ctx: PluginContext) => {
         namespace: 'database',
         version: 1
       },
-      collection: 'teams',
+      collection: 'team',
       limit: 30
     })
 
@@ -286,7 +286,7 @@ module.exports = async (ctx: PluginContext) => {
         namespace: 'database',
         version: 1
       },
-      collection: 'teams',
+      collection: 'team',
       limit: 30
     })
 
@@ -311,7 +311,7 @@ module.exports = async (ctx: PluginContext) => {
         namespace: 'database',
         version: 1
       },
-      collection: 'teams',
+      collection: 'team',
       limit: 30
     })
 
