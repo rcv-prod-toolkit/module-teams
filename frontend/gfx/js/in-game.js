@@ -86,6 +86,13 @@ function displayTeams(teams, bestOf) {
     setTeamPoints('red', teams.redTeam)
   }
 
+  if (teams.blueTeam.color !== '#000000') {
+    document.querySelector('.module-teams-ingame-gfx').style.setProperty('--blue-team', teams.blueTeam.color)
+  }
+  if (teams.redTeam.color !== '#000000') {
+    document.querySelector('.module-teams-ingame-gfx').style.setProperty('--red-team', teams.redTeam.color)
+  }
+
   blueTag.innerHTML = teams.blueTeam.tag
   resizeText(blueTag)
   redTag.innerHTML = teams.redTeam.tag

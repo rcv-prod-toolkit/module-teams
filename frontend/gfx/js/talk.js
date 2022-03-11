@@ -49,6 +49,13 @@ function displayTeams(teams, bestOf) {
   redName.innerHTML = teams.redTeam.name
   resizeText(redName)
 
+  if (teams.blueTeam.color !== '#000000') {
+    document.querySelector('.module-teams-talk-gfx').style.setProperty('--blue-team', teams.blueTeam.color)
+  }
+  if (teams.redTeam.color !== '#000000') {
+    document.querySelector('.module-teams-talk-gfx').style.setProperty('--red-team', teams.redTeam.color)
+  }
+
   redTag.classList.remove('outline')
   redName.classList.remove('outline')
   blueTag.classList.remove('outline')

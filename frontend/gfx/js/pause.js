@@ -35,6 +35,13 @@ function displaySingle(match) {
   const blueTeam = match.teams.blueTeam
   const redTeam = match.teams.redTeam
 
+  if (blueTeam.color !== '#000000') {
+    matchDiv.style.setProperty('--blue-team', blueTeam.color)
+  }
+  if (redTeam.color !== '#000000') {
+    matchDiv.style.setProperty('--red-team', redTeam.color)
+  }
+
   // blue tag
   const blueTag = document.createElement('h2')
   blueTag.classList.add('tag')
@@ -74,6 +81,13 @@ function displayBestOF(match) {
 
   const blueTeam = match.teams.blueTeam
   const redTeam = match.teams.redTeam
+
+  if (blueTeam.color !== '#000000') {
+    matchDiv.style.setProperty('--blue-team', blueTeam.color)
+  }
+  if (redTeam.color !== '#000000') {
+    matchDiv.style.setProperty('--red-team', redTeam.color)
+  }
 
   // blue Team
   const blueTeamDiv = document.createElement('div')
