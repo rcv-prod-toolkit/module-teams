@@ -19,7 +19,7 @@ $('#team-form').on('submit', (e) => {
     name: $('#blue-team-name').val(),
     tag: $('#blue-team-tag').val(),
     score: parseInt($('#blue-team-score').val()),
-    logo: $('#blue-team-logo').val(),
+    logo: $('#blue-team-logo')[0],
     color: $('#blue-team-color').val(),
     standing: $('#blue-team-standing').val()
   }
@@ -27,7 +27,7 @@ $('#team-form').on('submit', (e) => {
     name: $('#red-team-name').val(),
     tag: $('#red-team-tag').val(),
     score: parseInt($('#red-team-score').val()),
-    logo: $('#red-team-logo').val(),
+    logo: $('#red-team-logo')[0],
     color: $('#red-team-color').val(),
     standing: $('#red-team-standing').val()
   }
@@ -83,12 +83,14 @@ function unset() {
   $('#blue-team-tag').val('')
   $('#blue-team-score').val(0)
   $('#blue-team-logo').val('')
+  $('#blue-team-logo-preview').attr('src', '')
   $('#blue-team-color').val('#000000')
   $('#blue-team-standing').val('')
   $('#red-team-name').val('')
   $('#red-team-tag').val('')
   $('#red-team-score').val(0)
   $('#red-team-logo').val('')
+  $('#red-team-logo-preview').attr('src', '')
   $('#red-team-color').val('#000000')
   $('#red-team-standing').val('')
   $('#best-of').val(1)
@@ -122,14 +124,14 @@ async function displayData (data) {
   $('#blue-team-name').val(data.teams.blueTeam?.name || '')
   $('#blue-team-tag').val(data.teams.blueTeam?.tag || '')
   $('#blue-team-score').val(data.teams.blueTeam?.score || 0)
-  $('#blue-team-logo').val(data.teams.blueTeam?.logo || '')
+  $('#blue-team-logo-preview').attr('src', data.teams.blueTeam?.logo || '')
   $('#blue-team-color').val(data.teams.blueTeam?.color || '#000000')
   $('#blue-team-standing').val(data.teams.blueTeam?.standing || '')
 
   $('#red-team-name').val(data.teams.redTeam?.name || '')
   $('#red-team-tag').val(data.teams.redTeam?.tag || '')
   $('#red-team-score').val(data.teams.redTeam?.score || 0)
-  $('#red-team-logo').val(data.teams.redTeam?.logo || '')
+  $('#red-team-logo-preview').attr('src', data.teams.redTeam?.logo || '')
   $('#red-team-color').val(data.teams.redTeam?.color || '#000000')
   $('#red-team-standing').val(data.teams.redTeam?.standing || '')
 
@@ -157,7 +159,8 @@ function displayTeamTable (data) {
     const logoTd = document.createElement('td')
     if (t.logo !== undefined) {
       const logo = document.createElement('img')
-      logo.src = t.logo
+      logo.src = '/pages/op-module-teams/img/' + t.logo
+      logo.height = 50
       logoTd.appendChild(logo)
     }
     row.appendChild(logoTd)
@@ -243,7 +246,7 @@ function setTeam (name, team) {
 
   if (teamData === undefined) return
 
-  $(`#${team}-team-logo`).val(teamData.logo)
+  $(`#${team}-team-logo-preview`).attr('src', '/pages/op-module-teams/img/' + teamData.logo)
   $(`#${team}-team-tag`).val(teamData.tag)
   $(`#${team}-team-color`).val(teamData.color)
   $(`#${team}-team-standing`).val(teamData.standing)
@@ -253,7 +256,7 @@ $('#add-team-form').on('submit', (e) => {
   e.preventDefault()
 
   addTeam({
-    logo: $('#logo').val(),
+    logo: $('#logo')[0],
     name: $('#name').val(),
     tag: $('#tag').val(),
     color: $('#color').val(),
@@ -270,10 +273,14 @@ $('#add-team-form').on('submit', (e) => {
 /**
  * @param {Team} team
  */
-function addTeam (team) {
+async function addTeam (team) {
   const find = teams.find(t => t.name === team.name)
 
   if (find !== undefined) return
+
+  const upload = await updateFile(team.logo.files[0], $('#name').val())
+
+  team.logo = upload.data.name
 
   window.LPTE.emit({
     meta: {
@@ -301,3 +308,22 @@ $('#red-team-logo').on('change', (e) => {
     document.querySelector('#red-team-logo-preview').src = URL.createObjectURL(files[0])
   }
 })
+
+async function updateFile (file, name) {
+  if (!file) return
+
+  const ext = file.name.split('.').pop()
+
+  const form = new FormData()
+  form.append('file', file, `module-teams/frontend/img/${name}.${ext}`)
+  form.append('path', 'module-teams/frontend/img')
+
+  const response = await fetch('/upload', {
+    method: 'POST',
+    body: form
+  })
+
+  const json = await response.json()
+
+  return json
+}
