@@ -40,17 +40,22 @@
 
 #blue-tag, #red-tag {
   z-index: 10;
-  margin-top: 0.5rem;
   position: absolute;
+  width: 100px;
+  height: 61px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
 }
 
 #blue-tag {
-  right: 77%;
+  right: 78.6%;
   transform: translateX(50%);
 }
 
 #red-tag {
-  left: 77.7%;
+  left: 79.25%;
   transform: translateX(-50%);
 }
 
@@ -74,14 +79,14 @@
 }
 
 #blue-score {
-  transform: translateX(-615px);
-  margin-top: -3px;
+  transform: translateX(-633px);
+  margin-top: 0px;
 }
 
 #red-score {
-  transform: translateX(628px);
+  transform: translateX(647px);
   /* margin-top: -33px; */
-  margin-top: -3px;
+  margin-top: 0px;
 }
 
 .point {
