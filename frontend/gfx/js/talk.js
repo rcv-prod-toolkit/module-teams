@@ -33,7 +33,7 @@ const update = (data) => {
 
 window.LPTE.onready(() => {
   tick()
-  window.LPTE.on('rcv-teams', 'update', tick)
+  window.LPTE.on(namespace, 'update', tick)
 })
 
 function displayTeams(teams, bestOf) {

@@ -16,8 +16,8 @@ const tick = async () => {
 
 window.LPTE.onready(() => {
   tick()
-  window.LPTE.on('rcv-teams', 'set', tick)
-  window.LPTE.on('rcv-teams', 'clear-matches', tick)
+  window.LPTE.on(namespace, 'set', tick)
+  window.LPTE.on(namespace, 'clear-matches', tick)
 })
 
 function displayMatches(matches) {
