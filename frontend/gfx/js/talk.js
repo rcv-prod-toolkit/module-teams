@@ -1,9 +1,11 @@
 const namespace = 'module-teams'
 
 const teamsContainer = document.querySelectorAll('.team')
+const blueScore = document.querySelector('#blue-score')
 const blueTag = document.querySelector('#blue-tag')
 const redTag = document.querySelector('#red-tag')
 const blueName = document.querySelector('#blue-name')
+const redScore = document.querySelector('#red-score')
 const redName = document.querySelector('#red-name')
 const pointContainer = document.querySelector('#point-container')
 
@@ -43,10 +45,12 @@ function displayTeams(teams, bestOf) {
 
   blueTag.innerHTML = teams.blueTeam.tag
   blueName.innerHTML = teams.blueTeam.name
+  blueScore.innerHTML = teams.blueTeam.score
   resizeText(blueName)
 
   redTag.innerHTML = teams.redTeam.tag
   redName.innerHTML = teams.redTeam.name
+  redScore.innerHTML = teams.redTeam.score
   resizeText(redName)
 
   if (teams.blueTeam.color !== '#000000') {
@@ -60,7 +64,6 @@ function displayTeams(teams, bestOf) {
   redName.classList.remove('outline')
   blueTag.classList.remove('outline')
   blueName.classList.remove('outline')
-  if (teams.blueTeam.score === 0 && teams.redTeam.score === 0) return
 
   if (bestOf > 1) {
     document.body.classList.add('has-scores')

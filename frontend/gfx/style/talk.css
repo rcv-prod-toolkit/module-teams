@@ -58,11 +58,19 @@
   margin: 0 50px;
 }
 
-.tag {
+.tag, .score {
   font-size: 100px;
   text-transform: uppercase;
   line-height: 1;
   font-family: var(--secondary-font-family);
+}
+
+.score {
+  display: none;
+}
+
+.has-scores .score {
+  display: block;
 }
 
 .tag.outline {
@@ -79,7 +87,7 @@
   line-height: 1;
   text-transform: uppercase;
   font-size: 55px;
-  width: 500px;
+  width: 450px;
   white-space: nowrap;
   overflow: hidden;
 }
@@ -90,5 +98,12 @@
 }
 
 #red-name {
+  margin-left: 40px;
+}
+
+.has-scores #blue-tag {
+  margin-right: 40px;
+}
+.has-scores #red-tag {
   margin-left: 40px;
 }

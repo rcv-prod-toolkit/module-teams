@@ -19,7 +19,7 @@ $('#team-form').on('submit', (e) => {
     name: $('#blue-team-name').val(),
     tag: $('#blue-team-tag').val(),
     score: parseInt($('#blue-team-score').val()),
-    logo: $('#blue-team-logo')[0],
+    logo: $('#blue-team-logo-preview').attr('src'),
     color: $('#blue-team-color').val(),
     standing: $('#blue-team-standing').val()
   }
@@ -27,7 +27,7 @@ $('#team-form').on('submit', (e) => {
     name: $('#red-team-name').val(),
     tag: $('#red-team-tag').val(),
     score: parseInt($('#red-team-score').val()),
-    logo: $('#red-team-logo')[0],
+    logo: $('#red-team-logo-preview').attr('src'),
     color: $('#red-team-color').val(),
     standing: $('#red-team-standing').val()
   }

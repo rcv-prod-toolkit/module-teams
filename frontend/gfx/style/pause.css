@@ -96,7 +96,7 @@ h2 {
   display: inline-block;
   border-radius: 5px;
   border: 3px solid var(--background-color);
-  opacity: 0.15;
+  opacity: 0.25;
 }
 
 .shards.blue .shard.full {
