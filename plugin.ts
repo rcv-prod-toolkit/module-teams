@@ -24,7 +24,7 @@ module.exports = async (ctx: PluginContext) => {
       version: 1
     },
     pages: [{
-      name: `OP: ${namespace}`,
+      name: `Teams`,
       frontend: 'frontend',
       id : `op-${namespace}`
     }]
@@ -49,7 +49,7 @@ module.exports = async (ctx: PluginContext) => {
     const res = await ctx.LPTE.request({
       meta: {
         type: 'request',
-        namespace: 'database',
+        namespace: 'plugin-database',
         version: 1
       },
       collection: 'match',
@@ -79,7 +79,7 @@ module.exports = async (ctx: PluginContext) => {
       ctx.LPTE.emit({
         meta: {
           type: 'updateOne',
-          namespace: 'database',
+          namespace: 'plugin-database',
           version: 1
         },
         collection: 'match',
@@ -97,7 +97,7 @@ module.exports = async (ctx: PluginContext) => {
       ctx.LPTE.emit({
         meta: {
           type: 'updateOne',
-          namespace: 'database',
+          namespace: 'plugin-database',
           version: 1
         },
         collection: 'match',
@@ -115,7 +115,7 @@ module.exports = async (ctx: PluginContext) => {
       const response = await ctx.LPTE.request({
         meta: {
           type: 'insertOne',
-          namespace: 'database',
+          namespace: 'plugin-database',
           version: 1
         },
         collection: 'match',
@@ -200,7 +200,7 @@ module.exports = async (ctx: PluginContext) => {
   ctx.LPTE.on(namespace, 'clear-matches', (e: any) => {
     ctx.LPTE.emit({
       meta: {
-        namespace: 'database',
+        namespace: 'plugin-database',
         type: 'delete',
         version: 1
       },
@@ -232,7 +232,7 @@ module.exports = async (ctx: PluginContext) => {
     await ctx.LPTE.request({
       meta: {
         type: 'deleteOne',
-        namespace: 'database',
+        namespace: 'plugin-database',
         version: 1
       },
       collection: 'team',
@@ -242,7 +242,7 @@ module.exports = async (ctx: PluginContext) => {
     const res = await ctx.LPTE.request({
       meta: {
         type: 'request',
-        namespace: 'database',
+        namespace: 'plugin-database',
         version: 1
       },
       collection: 'team',
@@ -267,7 +267,7 @@ module.exports = async (ctx: PluginContext) => {
     await ctx.LPTE.request({
       meta: {
         type: 'insertOne',
-        namespace: 'database',
+        namespace: 'plugin-database',
         version: 1
       },
       collection: 'team',
@@ -283,7 +283,7 @@ module.exports = async (ctx: PluginContext) => {
     const res = await ctx.LPTE.request({
       meta: {
         type: 'request',
-        namespace: 'database',
+        namespace: 'plugin-database',
         version: 1
       },
       collection: 'team',
@@ -308,7 +308,7 @@ module.exports = async (ctx: PluginContext) => {
     const res = await ctx.LPTE.request({
       meta: {
         type: 'request',
-        namespace: 'database',
+        namespace: 'plugin-database',
         version: 1
       },
       collection: 'team',
@@ -345,7 +345,7 @@ module.exports = async (ctx: PluginContext) => {
     const res = await ctx.LPTE.request({
       meta: {
         type: 'request',
-        namespace: 'database',
+        namespace: 'plugin-database',
         version: 1
       },
       collection: 'match',
