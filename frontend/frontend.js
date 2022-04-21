@@ -8,9 +8,9 @@ const namespace = 'module-teams'
  */
 let teams = []
 
-$('#embed-copy-talk').val(`${location.href}/gfx/talk-gfx.html${window.apiKey !== null ? '?apikey' + window.apiKey : ''}`)
-$('#embed-copy-in-game').val(`${location.href}/gfx/in-game-gfx.html${window.apiKey !== null ? '?apikey' + window.apiKey : ''}`)
-$('#embed-copy-pause').val(`${location.href}/gfx/pause-gfx.html${window.apiKey !== null ? '?apikey' + window.apiKey : ''}`)
+$('#embed-copy-talk').val(`${location.href}/gfx/talk-gfx.html${window.apiKey !== null ? '?apikey=' + window.apiKey : ''}`)
+$('#embed-copy-in-game').val(`${location.href}/gfx/in-game-gfx.html${window.apiKey !== null ? '?apikey=' + window.apiKey : ''}`)
+$('#embed-copy-pause').val(`${location.href}/gfx/pause-gfx.html${window.apiKey !== null ? '?apikey=' + window.apiKey : ''}`)
 
 $('#team-form').on('submit', (e) => {
   e.preventDefault()
