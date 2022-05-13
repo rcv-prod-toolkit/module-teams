@@ -37,7 +37,7 @@ const update = (data) => {
 
 window.LPTE.onready(() => {
   tick()
-  window.LPTE.on(namespace, 'update', tick);
+  window.LPTE.on(namespace, 'update', update);
 })
 
 function displayTeams(teams, bestOf) {
@@ -88,9 +88,13 @@ function displayTeams(teams, bestOf) {
 
   if (teams.blueTeam.color !== '#000000') {
     document.querySelector('.module-teams-ingame-gfx').style.setProperty('--blue-team', teams.blueTeam.color)
+  } else {
+    document.querySelector('.module-teams-ingame-gfx').style.removeProperty('--blue-team')
   }
   if (teams.redTeam.color !== '#000000') {
     document.querySelector('.module-teams-ingame-gfx').style.setProperty('--red-team', teams.redTeam.color)
+  } else {
+    document.querySelector('.module-teams-ingame-gfx').style.removeProperty('--red-team')
   }
 
   blueTag.innerHTML = teams.blueTeam.tag

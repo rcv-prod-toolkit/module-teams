@@ -37,9 +37,13 @@ function displaySingle(match) {
 
   if (blueTeam.color !== '#000000') {
     matchDiv.style.setProperty('--blue-team', blueTeam.color)
+  } else {
+    matchDiv.style.removeProperty('--blue-team')
   }
   if (redTeam.color !== '#000000') {
     matchDiv.style.setProperty('--red-team', redTeam.color)
+  } else {
+    matchDiv.style.removeProperty('--red-team')
   }
 
   // blue tag
@@ -84,9 +88,13 @@ function displayBestOF(match) {
 
   if (blueTeam.color !== '#000000') {
     matchDiv.style.setProperty('--blue-team', blueTeam.color)
+  } else {
+    matchDiv.style.removeProperty('--blue-team')
   }
   if (redTeam.color !== '#000000') {
     matchDiv.style.setProperty('--red-team', redTeam.color)
+  } else {
+    matchDiv.style.removeProperty('--red-team')
   }
 
   // blue Team
