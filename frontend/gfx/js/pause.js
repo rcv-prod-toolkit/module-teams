@@ -52,6 +52,7 @@ function displaySingle(match) {
   blueTag.classList.add('blue')
   if (parseInt(blueTeam.score) < parseInt(redTeam.score)) {
     blueTag.classList.add('outline')
+    matchDiv.classList.add('redWins')
   }
   blueTag.innerText = blueTeam.tag
 
@@ -61,6 +62,7 @@ function displaySingle(match) {
   redTag.classList.add('red')
   if (parseInt(blueTeam.score) > parseInt(redTeam.score)) {
     redTag.classList.add('outline')
+    matchDiv.classList.add('blueWins')
   }
   redTag.innerText = redTeam.tag
 
@@ -106,6 +108,7 @@ function displayBestOF(match) {
   blueTag.classList.add('blue')
   if (parseInt(redTeam.score) > parseInt(match.bestOf) / 2) {
     blueTag.classList.add('outline')
+    matchDiv.classList.add('redWins')
   }
   blueTag.innerText = blueTeam.tag
 
@@ -126,6 +129,7 @@ function displayBestOF(match) {
   redTag.classList.add('red')
   if (parseInt(blueTeam.score) > parseInt(match.bestOf) / 2) {
     redTag.classList.add('outline')
+    matchDiv.classList.add('blueWins')
   }
   redTag.innerText = redTeam.tag
 
@@ -140,7 +144,7 @@ function displayBestOF(match) {
   // vs
   const vs = document.createElement('h1')
   vs.classList.add('vs')
-  vs.innerText = "vs"
+  vs.innerText = 'vs'
 
   matchDiv.appendChild(blueTeamDiv)
   matchDiv.appendChild(vs)
