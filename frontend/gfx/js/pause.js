@@ -112,12 +112,18 @@ function displayBestOF(match) {
   }
   blueTag.innerText = blueTeam.tag
 
+  const blueScore = document.createElement('h3')
+  blueScore.classList.add('score')
+  blueScore.classList.add('blue')
+  blueScore.innerText = blueTeam.score
+
   const blueShards = displayShards(parseInt(blueTeam.score), match.bestOf)
   blueShards.classList.add('blue')
   if (parseInt(redTeam.score) > parseInt(match.bestOf) / 2) {
     blueShards.classList.add('outline')
   }
   blueTeamDiv.appendChild(blueTag)
+  blueTeamDiv.appendChild(blueScore)
   blueTeamDiv.appendChild(blueShards)
 
   // blue team
@@ -133,12 +139,18 @@ function displayBestOF(match) {
   }
   redTag.innerText = redTeam.tag
 
+  const redScore = document.createElement('h3')
+  redScore.classList.add('score')
+  redScore.classList.add('red')
+  redScore.innerText = redTeam.score
+
   const redShards = displayShards(parseInt(redTeam.score), match.bestOf)
   redShards.classList.add('red')
   if (parseInt(blueTeam.score) > parseInt(match.bestOf) / 2) {
     redShards.classList.add('outline')
   }
   redTeamDiv.appendChild(redTag)
+  redTeamDiv.appendChild(redScore)
   redTeamDiv.appendChild(redShards)
 
   // vs
