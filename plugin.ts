@@ -53,13 +53,11 @@ module.exports = async (ctx: PluginContext) => {
         version: 1
       },
       collection: 'match',
-      filter: {
-        "date": {
-          $gte: startOfDay(new Date()),
-          $lte: endOfDay(new Date())
-        }
-      },
-      sort: {"date": 1},
+      filter: (match: any) =>
+        match.date > startOfDay(new Date()) &&
+        match.data < endOfDay(new Date()),
+      sort: (a: any, b: any) =>
+        a - b
     })
 
     ctx.LPTE.emit({
@@ -130,7 +128,7 @@ module.exports = async (ctx: PluginContext) => {
         }
       });
 
-      if (response === undefined) {
+      if (response === undefined || response.id === undefined) {
         return ctx.log.warn('match could not be inserted')
       }
       gfxState.id = response.id
@@ -249,8 +247,8 @@ module.exports = async (ctx: PluginContext) => {
       limit: 30
     })
 
-    if (res === undefined) {
-      return ctx.log.warn('teams could not be loaded')
+    if (res === undefined || res.data === undefined) {
+      ctx.log.warn('teams could not be loaded')
     }
 
     ctx.LPTE.emit({
@@ -259,7 +257,7 @@ module.exports = async (ctx: PluginContext) => {
         namespace,
         version: 1
       },
-      teams: res.data
+      teams: res?.data
     });
   });
 
@@ -290,8 +288,8 @@ module.exports = async (ctx: PluginContext) => {
       limit: 30
     })
 
-    if (res === undefined) {
-      return ctx.log.warn('teams could not be loaded')
+    if (res === undefined || res.data === undefined) {
+      ctx.log.warn('teams could not be loaded')
     }
 
     ctx.LPTE.emit({
@@ -300,7 +298,7 @@ module.exports = async (ctx: PluginContext) => {
         namespace,
         version: 1
       },
-      teams: res.data
+      teams: res?.data
     });
   });
 
@@ -315,8 +313,8 @@ module.exports = async (ctx: PluginContext) => {
       limit: 30
     })
 
-    if (res === undefined) {
-      return ctx.log.warn('teams could not be loaded')
+    if (res === undefined || res.data === undefined) {
+      ctx.log.warn('teams could not be loaded')
     }
 
     ctx.LPTE.emit({
@@ -325,7 +323,7 @@ module.exports = async (ctx: PluginContext) => {
         namespace: 'reply',
         version: 1
       },
-      teams: res.data
+      teams: res?.data
     });
   });
 
@@ -349,17 +347,15 @@ module.exports = async (ctx: PluginContext) => {
         version: 1
       },
       collection: 'match',
-      filter: {
-        "date": {
-          $gte: startOfDay(new Date()),
-          $lte: endOfDay(new Date())
-        }
-      },
-      sort: {"date":1},
+      filter: (match: any) =>
+        match.date > startOfDay(new Date()) &&
+        match.data < endOfDay(new Date()),
+      sort: (a: any, b: any) =>
+        a - b,
       limit: 1
     })
 
-    if (res === undefined) {
+    if (res === undefined || res.data === undefined) {
       return ctx.log.warn('matches could not be loaded')
     }
 
