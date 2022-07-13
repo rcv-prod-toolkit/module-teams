@@ -106,7 +106,7 @@ function displayBestOF(match) {
   const blueTag = document.createElement('h2')
   blueTag.classList.add('tag')
   blueTag.classList.add('blue')
-  if (parseInt(redTeam.score) > parseInt(match.bestOf) / 2) {
+  if (parseInt(redTeam.score) >= Math.ceil(parseInt(match.bestOf) / 2)) {
     blueTag.classList.add('outline')
     matchDiv.classList.add('redWins')
   }
@@ -119,7 +119,7 @@ function displayBestOF(match) {
 
   const blueShards = displayShards(parseInt(blueTeam.score), match.bestOf)
   blueShards.classList.add('blue')
-  if (parseInt(redTeam.score) > parseInt(match.bestOf) / 2) {
+  if (parseInt(redTeam.score) >= Math.ceil(parseInt(match.bestOf) / 2)) {
     blueShards.classList.add('outline')
   }
   blueTeamDiv.appendChild(blueTag)
@@ -133,7 +133,7 @@ function displayBestOF(match) {
   const redTag = document.createElement('h2')
   redTag.classList.add('tag')
   redTag.classList.add('red')
-  if (parseInt(blueTeam.score) > parseInt(match.bestOf) / 2) {
+  if (parseInt(blueTeam.score) >= Math.ceil(parseInt(match.bestOf) / 2)) {
     redTag.classList.add('outline')
     matchDiv.classList.add('blueWins')
   }
@@ -146,7 +146,7 @@ function displayBestOF(match) {
 
   const redShards = displayShards(parseInt(redTeam.score), match.bestOf)
   redShards.classList.add('red')
-  if (parseInt(blueTeam.score) > parseInt(match.bestOf) / 2) {
+  if (parseInt(blueTeam.score) >= Math.ceil(parseInt(match.bestOf) / 2)) {
     redShards.classList.add('outline')
   }
   redTeamDiv.appendChild(redTag)
