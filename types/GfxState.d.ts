@@ -6,7 +6,7 @@ export interface GfxState {
     blueTeam?: Team
     redTeam?: Team
   }
-  bestOf: 1 | 3 | 5
+  bestOf: number
   id?: any
   roundOf: 1 | 2 | 4 | 8 | 16 | 32 | 64 | 128 | 256 | 512 | 1024 | 2048
 }
