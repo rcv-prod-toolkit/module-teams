@@ -22,6 +22,7 @@ window.LPTE.onready(() => {
 
 function displayMatches(matches) {
   container.innerHTML = ''
+  if (matches === undefined) return
   for (const match of matches) {
     if (parseInt(match.bestOf) === 1) displaySingle(match)
     else displayBestOF(match)

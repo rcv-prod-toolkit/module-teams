@@ -153,6 +153,8 @@ const teamTableBody = document.querySelector('#team-table')
 function displayTeamTable (data) {
   teamTableBody.innerHTML = ''
 
+  if (data.teams === undefined) return
+
   data.teams.forEach(t => {
     const row = document.createElement('tr')
 
@@ -193,7 +195,7 @@ function displayTeamTable (data) {
     deleteBtn.classList.add('btn', 'btn-danger')
     deleteBtn.innerHTML = '<i class="fas fa-trash-alt"></i>'
     deleteBtn.onclick = () => {
-      deleteTeam(t._id)
+      deleteTeam(t.id)
     }
     deleteTd.appendChild(deleteBtn)
     row.appendChild(deleteTd)
@@ -202,20 +204,22 @@ function displayTeamTable (data) {
   })
 }
 
-function deleteTeam (_id) {
+function deleteTeam (id) {
   window.LPTE.emit({
     meta: {
       namespace,
       type: 'delete-team',
       version: 1
     },
-    _id
+    id
   })
 }
 
 const teamList = document.getElementById('teams');
 
 function displayTeamList (data) {
+  if (data.teams === undefined) return
+
   teams = data.teams
   const length = teamList.options.length
 
@@ -254,6 +258,7 @@ function setTeam (name, team) {
 
 $('#add-team-form').on('submit', (e) => {
   e.preventDefault()
+  console.log(e)
 
   addTeam({
     logo: $('#logo')[0],
@@ -278,9 +283,10 @@ async function addTeam (team) {
 
   if (find !== undefined) return
 
-  const upload = await updateFile(team.logo.files[0], $('#name').val())
-
-  team.logo = upload.data.name
+  if (team.logo !== undefined) {
+    const upload = await updateFile(team.logo.files[0], $('#name').val())
+    team.logo = upload?.data.name
+  }
 
   window.LPTE.emit({
     meta: {

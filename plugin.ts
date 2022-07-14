@@ -234,7 +234,7 @@ module.exports = async (ctx: PluginContext) => {
         version: 1
       },
       collection: 'team',
-      id: e._id
+      id: e.id
     });
 
     const res = await ctx.LPTE.request({
@@ -363,7 +363,7 @@ module.exports = async (ctx: PluginContext) => {
       gfxState.state = "READY"
       gfxState.teams = res.data[0].teams
       gfxState.bestOf = res.data[0].bestOf
-      gfxState.id = res.data[0]._id
+      gfxState.id = res.data[0].id
       gfxState.roundOf = res.data[0].roundOf
     } 
   }
