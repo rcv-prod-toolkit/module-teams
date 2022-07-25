@@ -58,7 +58,8 @@
   margin: 0 50px;
 }
 
-.tag, .score {
+.tag,
+.score {
   font-size: 100px;
   text-transform: uppercase;
   line-height: 1;

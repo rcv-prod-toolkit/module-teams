@@ -38,7 +38,8 @@
   z-index: 5;
 }
 
-#blue-tag, #red-tag {
+#blue-tag,
+#red-tag {
   z-index: 10;
   position: absolute;
   width: 100px;
@@ -59,7 +60,6 @@
   transform: translateX(-50%);
 }
 
-
 #score-container {
   position: absolute;
   background-image: url(../img/scores.png);
@@ -73,7 +73,8 @@
   z-index: 1;
 }
 
-#blue-score, #red-score {
+#blue-score,
+#red-score {
   z-index: 10;
   margin-top: 0.3rem;
 }

@@ -1,49 +1,123 @@
 <h1>RCVolus Teams: Operator Cockpit</h1>
-<div style="display: flex; margin-bottom: 2rem;">
+<div style="display: flex; margin-bottom: 2rem">
   <div>
     <h2>Preview for talk</h2>
-    <div style="width: 369px; height: 208px; overflow: hidden; margin-bottom: 1rem;">
-      <iframe src="/pages/op-module-teams/gfx/talk-gfx.html" width="1920" height="1080" style="transform: scale(0.2); transform-origin: 0 0;"></iframe>
+    <div
+      style="width: 369px; height: 208px; overflow: hidden; margin-bottom: 1rem"
+    >
+      <iframe
+        src="/pages/op-module-teams/gfx/talk-gfx.html"
+        width="1920"
+        height="1080"
+        style="transform: scale(0.2); transform-origin: 0 0"
+      ></iframe>
     </div>
     <h3>Embed</h3>
-    <input style="width: 100%;" readonly id="embed-copy-talk" class="form-control" />
+    <input
+      style="width: 100%"
+      readonly
+      id="embed-copy-talk"
+      class="form-control"
+    />
   </div>
-  <div style="margin-left: 3rem;">
+  <div style="margin-left: 3rem">
     <h2>Preview for in-game</h2>
-    <div style="width: 369px; height: 208px; overflow: hidden; margin-bottom: 1rem;">
-      <iframe src="/pages/op-module-teams/gfx/in-game-gfx.html" width="1920" height="1080" style="transform: scale(0.2); transform-origin: 0 0;"></iframe>
+    <div
+      style="width: 369px; height: 208px; overflow: hidden; margin-bottom: 1rem"
+    >
+      <iframe
+        src="/pages/op-module-teams/gfx/in-game-gfx.html"
+        width="1920"
+        height="1080"
+        style="transform: scale(0.2); transform-origin: 0 0"
+      ></iframe>
     </div>
     <h3>Embed</h3>
-    <input style="width: 100%;" readonly id="embed-copy-in-game" class="form-control" />
+    <input
+      style="width: 100%"
+      readonly
+      id="embed-copy-in-game"
+      class="form-control"
+    />
   </div>
-  <div style="margin-left: 3rem;">
+  <div style="margin-left: 3rem">
     <h2>Preview for pause</h2>
-    <div style="width: 369px; height: 208px; overflow: hidden; margin-bottom: 1rem;">
-      <iframe src="/pages/op-module-teams/gfx/pause-gfx.html" width="1920" height="1080" style="transform: scale(0.2); transform-origin: 0 0;"></iframe>
+    <div
+      style="width: 369px; height: 208px; overflow: hidden; margin-bottom: 1rem"
+    >
+      <iframe
+        src="/pages/op-module-teams/gfx/pause-gfx.html"
+        width="1920"
+        height="1080"
+        style="transform: scale(0.2); transform-origin: 0 0"
+      ></iframe>
     </div>
     <h3>Embed</h3>
-    <input style="width: 100%;" readonly id="embed-copy-pause" class="form-control" />
+    <input
+      style="width: 100%"
+      readonly
+      id="embed-copy-pause"
+      class="form-control"
+    />
   </div>
 </div>
 
 <form id="team-form">
-  <h2 style="text-align: center;">Teams</h2>
+  <h2 style="text-align: center">Teams</h2>
 
   <datalist id="teams"></datalist>
 
-  <div style="display: flex; width: 100%;">
-    <div id="blue-team" style="display: flex; flex-grow: 1;">
-      <input style="flex-grow: 1;" type="text" placeholder="Name" id="blue-team-name" required list="teams" class="form-control" />
-      <input style="width: 5rem; margin-left: 1rem;" placeholder="Tag" type="text" id="blue-team-tag" required class="form-control" />
-      <input style="width: 5rem; margin-left: 1rem; text-align: center;" value="0" type="number" id="blue-team-score" min="0" max="3" required class="form-control" />
+  <div style="display: flex; width: 100%">
+    <div id="blue-team" style="display: flex; flex-grow: 1">
+      <input
+        style="flex-grow: 1"
+        type="text"
+        placeholder="Name"
+        id="blue-team-name"
+        required
+        list="teams"
+        class="form-control"
+      />
+      <input
+        style="width: 5rem; margin-left: 1rem"
+        placeholder="Tag"
+        type="text"
+        id="blue-team-tag"
+        required
+        class="form-control"
+      />
+      <input
+        style="width: 5rem; margin-left: 1rem; text-align: center"
+        value="0"
+        type="number"
+        id="blue-team-score"
+        min="0"
+        max="3"
+        required
+        class="form-control"
+      />
     </div>
 
-    <div style="margin: 0 1rem;">
-      <input style="height: 100%; flex-grow: 1; text-align: center;" value="1" type="number" id="best-of" min="1" max="5" class="form-control" required />
+    <div style="margin: 0 1rem">
+      <input
+        style="height: 100%; flex-grow: 1; text-align: center"
+        value="1"
+        type="number"
+        id="best-of"
+        min="1"
+        max="5"
+        class="form-control"
+        required
+      />
     </div>
 
-    <div style="margin-right: 1rem;">
-      <select id="round-of" style="height: 100%; flex-grow: 1;" required class="form-control">
+    <div style="margin-right: 1rem">
+      <select
+        id="round-of"
+        style="height: 100%; flex-grow: 1"
+        required
+        class="form-control"
+      >
         <option value="2">FINALS</option>
         <option value="4">SEMI FINALS</option>
         <option value="8">QUARTER FINALS</option>
@@ -60,34 +134,114 @@
       </select>
     </div>
 
-    <div id="red-team" style="display: flex; flex-grow: 1;">
-      <input style="width: 5rem; margin-right: 1rem; text-align: center;" value="0" type="number" id="red-team-score" min="0" max="3" class="form-control" required />
-      <input style="width: 5rem; margin-right: 1rem; text-align: right;" type="text" placeholder="Tag" class="form-control" id="red-team-tag" required />
-      <input style="flex-grow: 1; text-align: right;" class="form-control" type="text" placeholder="Name" id="red-team-name" required list="teams" />
+    <div id="red-team" style="display: flex; flex-grow: 1">
+      <input
+        style="width: 5rem; margin-right: 1rem; text-align: center"
+        value="0"
+        type="number"
+        id="red-team-score"
+        min="0"
+        max="3"
+        class="form-control"
+        required
+      />
+      <input
+        style="width: 5rem; margin-right: 1rem; text-align: right"
+        type="text"
+        placeholder="Tag"
+        class="form-control"
+        id="red-team-tag"
+        required
+      />
+      <input
+        style="flex-grow: 1; text-align: right"
+        class="form-control"
+        type="text"
+        placeholder="Name"
+        id="red-team-name"
+        required
+        list="teams"
+      />
     </div>
   </div>
 
   <div class="d-flex align-items-center">
-    <div class="d-flex align-items-center" style="margin-top: 1rem; margin-right: 5rem; gap: 1rem;">
+    <div
+      class="d-flex align-items-center"
+      style="margin-top: 1rem; margin-right: 5rem; gap: 1rem"
+    >
       <img id="blue-team-logo-preview" src="#" width="50px" height="50px" />
-      <input type="file" id="blue-team-logo" accept="image/*" class="form-control" >
-      <input type="color" id="blue-team-color" class="form-control form-control-color" >
-      <input type="text" id="blue-team-standing" placeholder="standing" class="flex-grow-1 form-control">
+      <input
+        type="file"
+        id="blue-team-logo"
+        accept="image/*"
+        class="form-control"
+      />
+      <input
+        type="color"
+        id="blue-team-color"
+        class="form-control form-control-color"
+      />
+      <input
+        type="text"
+        id="blue-team-standing"
+        placeholder="standing"
+        class="flex-grow-1 form-control"
+      />
     </div>
-    <div class="d-flex flex-row-reverse" style="margin-top: 1rem; gap: 1rem;">
+    <div class="d-flex flex-row-reverse" style="margin-top: 1rem; gap: 1rem">
       <img id="red-team-logo-preview" src="#" width="50px" height="50px" />
-      <input type="file" id="red-team-logo" accept="image/*" class="form-control" >
-      <input type="color" id="red-team-color" class="form-control form-control-color" >
-      <input type="text" id="red-team-standing" placeholder="standing" class="flex-grow-1 form-control">
+      <input
+        type="file"
+        id="red-team-logo"
+        accept="image/*"
+        class="form-control"
+      />
+      <input
+        type="color"
+        id="red-team-color"
+        class="form-control form-control-color"
+      />
+      <input
+        type="text"
+        id="red-team-standing"
+        placeholder="standing"
+        class="flex-grow-1 form-control"
+      />
     </div>
   </div>
 
-  <div style="display: flex; width: 100%; justify-content: center; margin-top: 1rem;">
-    <button class="btn btn-secondary" style="width: 100px; margin-right: 1rem;">Save</button>
-    <button type="button" class="btn btn-secondary" style="width: 100px; margin-right: 1rem;" onclick="swop()">Swop</button>
-    <button type="button" class="btn btn-secondary" style="width: 100px; margin-right: 1rem;" onclick="unset()">Unset</button>
+  <div
+    style="
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      margin-top: 1rem;
+    "
+  >
+    <button class="btn btn-secondary" style="width: 100px; margin-right: 1rem">
+      Save
+    </button>
+    <button
+      type="button"
+      class="btn btn-secondary"
+      style="width: 100px; margin-right: 1rem"
+      onclick="swop()"
+    >
+      Swop
+    </button>
+    <button
+      type="button"
+      class="btn btn-secondary"
+      style="width: 100px; margin-right: 1rem"
+      onclick="unset()"
+    >
+      Unset
+    </button>
 
-    <button type="button" class="btn btn-danger" onclick="clearMatches()">Clear Matches</button>
+    <button type="button" class="btn btn-danger" onclick="clearMatches()">
+      Clear Matches
+    </button>
   </div>
 </form>
 
@@ -106,32 +260,41 @@
 </table>
 
 <form id="add-team-form" class="mt-5">
-  <div class="d-flex" style="gap: 1rem;">
+  <div class="d-flex" style="gap: 1rem">
     <div class="form-group">
       <label for="logo">Logo</label>
-      <input type="file" id="logo" accept="image/*" class="form-control" >
+      <input type="file" id="logo" accept="image/*" class="form-control" />
     </div>
     <div class="form-group flex-grow-1">
       <label for="name">Name</label>
-      <input type="text" class="form-control" id="name" required aria-describedby="Name" placeholder="Name">
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        required
+        aria-describedby="Name"
+        placeholder="Name"
+      />
     </div>
-    <div class="form-group" style="width: 10rem;">
+    <div class="form-group" style="width: 10rem">
       <label for="tag">Tag</label>
-      <input type="text" id="tag" placeholder="Tag" class="form-control">
+      <input type="text" id="tag" placeholder="Tag" class="form-control" />
     </div>
-    <div class="form-group" style="width: 5rem;">
+    <div class="form-group" style="width: 5rem">
       <label for="color">Color</label>
-      <input type="color" id="color" class="form-control form-control-color">
+      <input type="color" id="color" class="form-control form-control-color" />
     </div>
-    <div class="form-group" style="width: 7rem;">
+    <div class="form-group" style="width: 7rem">
       <label for="standing">Standing</label>
-      <input type="text" id="standing" placeholder="standing" class="form-control">
+      <input
+        type="text"
+        id="standing"
+        placeholder="standing"
+        class="form-control"
+      />
     </div>
   </div>
   <button type="submit" class="btn btn-success btn-block">Add</button>
 </form>
 
 <script src="/pages/op-module-teams/frontend.js" defer></script>
-
-
-

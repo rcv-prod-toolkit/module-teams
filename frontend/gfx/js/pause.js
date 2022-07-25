@@ -8,8 +8,8 @@ const tick = async () => {
       type: 'request-matches-of-the-day',
       namespace,
       version: 1
-    },
-  });
+    }
+  })
 
   displayMatches(res.matches.data)
 }
@@ -70,7 +70,7 @@ function displaySingle(match) {
   // vs
   const vs = document.createElement('h1')
   vs.classList.add('vs')
-  vs.innerText = "vs"
+  vs.innerText = 'vs'
 
   matchDiv.appendChild(blueTag)
   matchDiv.appendChild(vs)
@@ -188,7 +188,7 @@ function displayShards(points, bestOf = 3) {
 
 const isOverflown = ({ clientWidth, scrollWidth }) => scrollWidth > clientWidth
 
-const resizeText = ( parent ) => {
+const resizeText = (parent) => {
   let i = 20 // let's start with 12px
   let overflow = false
   const maxSize = 75 // very huge text size

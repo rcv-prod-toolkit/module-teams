@@ -16,22 +16,22 @@ const tick = async () => {
       type: 'request-current',
       version: 1
     }
-  });
+  })
 
   if (data.state === 'READY') {
     displayTeams(data.teams, data.bestOf)
   } else {
-    teamsContainer.forEach(t => {
+    teamsContainer.forEach((t) => {
       t.style.display = 'none'
     })
   }
 }
 
 const update = (data) => {
-  if (data.state === "READY") {
+  if (data.state === 'READY') {
     displayTeams(data.teams, data.bestOf)
   } else {
-    teamsContainer.forEach(t => {
+    teamsContainer.forEach((t) => {
       t.style.display = 'none'
     })
   }
@@ -43,7 +43,7 @@ window.LPTE.onready(() => {
 })
 
 function displayTeams(teams, bestOf) {
-  teamsContainer.forEach(t => {
+  teamsContainer.forEach((t) => {
     t.style.display = 'flex'
   })
 
@@ -58,14 +58,22 @@ function displayTeams(teams, bestOf) {
   resizeText(redName)
 
   if (teams.blueTeam.color !== '#000000') {
-    document.querySelector('.module-teams-talk-gfx').style.setProperty('--blue-team', teams.blueTeam.color)
+    document
+      .querySelector('.module-teams-talk-gfx')
+      .style.setProperty('--blue-team', teams.blueTeam.color)
   } else {
-    document.querySelector('.module-teams-talk-gfx').style.removeProperty('--blue-team')
+    document
+      .querySelector('.module-teams-talk-gfx')
+      .style.removeProperty('--blue-team')
   }
   if (teams.redTeam.color !== '#000000') {
-    document.querySelector('.module-teams-talk-gfx').style.setProperty('--red-team', teams.redTeam.color)
+    document
+      .querySelector('.module-teams-talk-gfx')
+      .style.setProperty('--red-team', teams.redTeam.color)
   } else {
-    document.querySelector('.module-teams-talk-gfx').style.removeProperty('--red-team')
+    document
+      .querySelector('.module-teams-talk-gfx')
+      .style.removeProperty('--red-team')
   }
 
   redTag.classList.remove('outline')
@@ -99,7 +107,7 @@ function displayTeams(teams, bestOf) {
 
 const isOverflown = ({ clientWidth, scrollWidth }) => scrollWidth > clientWidth
 
-const resizeText = ( parent ) => {
+const resizeText = (parent) => {
   let i = 20 // let's start with 12px
   let overflow = false
   const maxSize = 65 // very huge text size
@@ -114,7 +122,7 @@ const resizeText = ( parent ) => {
   parent.style.fontSize = `${i - 1}px`
 }
 
-function displayPoints (bestOf, blueTeam, redTeam) {
+function displayPoints(bestOf, blueTeam, redTeam) {
   const pointsToWin = Math.ceil(bestOf / 2)
   for (let i = 0; i < 5; i++) {
     const point = i + 1

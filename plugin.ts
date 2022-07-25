@@ -1,20 +1,20 @@
 import type { PluginContext } from '@rcv-prod-toolkit/types'
 import type { GfxState } from './types/GfxState'
-import util from 'util';
+import util from 'util'
 import endOfDay from 'date-fns/endOfDay'
 import startOfDay from 'date-fns/startOfDay'
 
-const initialState : GfxState = {
-  state: "NO_MATCH",
+const initialState: GfxState = {
+  state: 'NO_MATCH',
   teams: {},
   bestOf: 1,
   roundOf: 2
 }
 
 module.exports = async (ctx: PluginContext) => {
-  const namespace = ctx.plugin.module.getName();
+  const namespace = ctx.plugin.module.getName()
 
-  let gfxState = initialState;
+  let gfxState = initialState
 
   // Register new UI page
   ctx.LPTE.emit({
@@ -23,12 +23,14 @@ module.exports = async (ctx: PluginContext) => {
       namespace: 'ui',
       version: 1
     },
-    pages: [{
-      name: `Teams`,
-      frontend: 'frontend',
-      id : `op-${namespace}`
-    }]
-  });
+    pages: [
+      {
+        name: `Teams`,
+        frontend: 'frontend',
+        id: `op-${namespace}`
+      }
+    ]
+  })
 
   // Answer requests to get state
   ctx.LPTE.on(namespace, 'request-current', async (e: any) => {
@@ -42,8 +44,8 @@ module.exports = async (ctx: PluginContext) => {
       teams: gfxState.teams,
       bestOf: gfxState.bestOf,
       roundOf: gfxState.roundOf
-    });
-  });
+    })
+  })
 
   ctx.LPTE.on(namespace, 'request-matches-of-the-day', async (e: any) => {
     const res = await ctx.LPTE.request({
@@ -56,8 +58,7 @@ module.exports = async (ctx: PluginContext) => {
       filter: (match: any) =>
         match.date > startOfDay(new Date()) &&
         match.data < endOfDay(new Date()),
-      sort: (a: any, b: any) =>
-        a - b
+      sort: (a: any, b: any) => a - b
     })
 
     ctx.LPTE.emit({
@@ -67,13 +68,21 @@ module.exports = async (ctx: PluginContext) => {
         version: 1
       },
       matches: res
-    });
-  });
+    })
+  })
 
   ctx.LPTE.on(namespace, 'set', async (e: any) => {
-    if (util.isDeepStrictEqual(gfxState.teams, e.teams) && gfxState.bestOf == e.bestOf && gfxState.roundOf == e.roundOf) return
+    if (
+      util.isDeepStrictEqual(gfxState.teams, e.teams) &&
+      gfxState.bestOf == e.bestOf &&
+      gfxState.roundOf == e.roundOf
+    )
+      return
 
-    if (gfxState.teams.blueTeam?.name == e.teams.redTeam.name && gfxState.teams.redTeam?.name == e.teams.blueTeam.name) {
+    if (
+      gfxState.teams.blueTeam?.name == e.teams.redTeam.name &&
+      gfxState.teams.redTeam?.name == e.teams.blueTeam.name
+    ) {
       ctx.LPTE.emit({
         meta: {
           type: 'updateOne',
@@ -90,8 +99,11 @@ module.exports = async (ctx: PluginContext) => {
           bestOf: e.bestOf,
           roundOf: e.roundOf
         }
-      });
-    } else if (gfxState.teams.blueTeam?.name == e.teams.blueTeam.name && gfxState.teams.redTeam?.name == e.teams.redTeam.name) {
+      })
+    } else if (
+      gfxState.teams.blueTeam?.name == e.teams.blueTeam.name &&
+      gfxState.teams.redTeam?.name == e.teams.redTeam.name
+    ) {
       ctx.LPTE.emit({
         meta: {
           type: 'updateOne',
@@ -108,7 +120,7 @@ module.exports = async (ctx: PluginContext) => {
           bestOf: e.bestOf,
           roundOf: e.roundOf
         }
-      });
+      })
     } else {
       const response = await ctx.LPTE.request({
         meta: {
@@ -126,7 +138,7 @@ module.exports = async (ctx: PluginContext) => {
           roundOf: e.roundOf,
           date: new Date()
         }
-      });
+      })
 
       if (response === undefined || response.id === undefined) {
         return ctx.log.warn('match could not be inserted')
@@ -134,7 +146,7 @@ module.exports = async (ctx: PluginContext) => {
       gfxState.id = response.id
     }
 
-    gfxState.state = 'READY';
+    gfxState.state = 'READY'
     gfxState.teams = e.teams
     gfxState.bestOf = e.bestOf
     gfxState.roundOf = e.roundOf
@@ -149,8 +161,8 @@ module.exports = async (ctx: PluginContext) => {
       teams: gfxState.teams,
       bestOf: gfxState.bestOf,
       roundOf: gfxState.roundOf
-    });
-  });
+    })
+  })
 
   ctx.LPTE.on(namespace, 'swop', (e: any) => {
     if (gfxState.state !== 'READY') return
@@ -171,12 +183,12 @@ module.exports = async (ctx: PluginContext) => {
       teams: gfxState.teams,
       bestOf: gfxState.bestOf,
       roundOf: gfxState.roundOf
-    });
-  });
+    })
+  })
 
   ctx.LPTE.on(namespace, 'unset', (e: any) => {
     gfxState = {
-      state: "NO_MATCH",
+      state: 'NO_MATCH',
       teams: {},
       bestOf: 1,
       roundOf: 2
@@ -192,8 +204,8 @@ module.exports = async (ctx: PluginContext) => {
       teams: gfxState.teams,
       bestOf: gfxState.bestOf,
       roundOf: gfxState.roundOf
-    });
-  });
+    })
+  })
 
   ctx.LPTE.on(namespace, 'clear-matches', (e: any) => {
     ctx.LPTE.emit({
@@ -204,10 +216,10 @@ module.exports = async (ctx: PluginContext) => {
       },
       collection: 'match',
       filter: {}
-    });
+    })
 
     gfxState = {
-      state: "NO_MATCH",
+      state: 'NO_MATCH',
       teams: {},
       bestOf: 1,
       roundOf: 2
@@ -223,8 +235,8 @@ module.exports = async (ctx: PluginContext) => {
       teams: gfxState.teams,
       bestOf: gfxState.bestOf,
       roundOf: gfxState.roundOf
-    });
-  });
+    })
+  })
 
   ctx.LPTE.on(namespace, 'delete-team', async (e: any) => {
     await ctx.LPTE.request({
@@ -235,7 +247,7 @@ module.exports = async (ctx: PluginContext) => {
       },
       collection: 'team',
       id: e.id
-    });
+    })
 
     const res = await ctx.LPTE.request({
       meta: {
@@ -258,8 +270,8 @@ module.exports = async (ctx: PluginContext) => {
         version: 1
       },
       teams: res?.data
-    });
-  });
+    })
+  })
 
   ctx.LPTE.on(namespace, 'add-team', async (e: any) => {
     await ctx.LPTE.request({
@@ -274,9 +286,9 @@ module.exports = async (ctx: PluginContext) => {
         name: e.name,
         tag: e.tag,
         color: e.color,
-        standing: e.standing,
+        standing: e.standing
       }
-    });
+    })
 
     const res = await ctx.LPTE.request({
       meta: {
@@ -299,8 +311,8 @@ module.exports = async (ctx: PluginContext) => {
         version: 1
       },
       teams: res?.data
-    });
-  });
+    })
+  })
 
   ctx.LPTE.on(namespace, 'request-teams', async (e: any) => {
     const res = await ctx.LPTE.request({
@@ -324,8 +336,8 @@ module.exports = async (ctx: PluginContext) => {
         version: 1
       },
       teams: res?.data
-    });
-  });
+    })
+  })
 
   // Emit event that we're ready to operate
   ctx.LPTE.emit({
@@ -335,11 +347,11 @@ module.exports = async (ctx: PluginContext) => {
       version: 1
     },
     status: 'RUNNING'
-  });
+  })
 
-  await ctx.LPTE.await('lpt', 'ready', 150000);
+  await ctx.LPTE.await('lpt', 'ready', 150000)
 
-  if (gfxState.state == "NO_MATCH") {
+  if (gfxState.state == 'NO_MATCH') {
     const res = await ctx.LPTE.request({
       meta: {
         type: 'request',
@@ -350,8 +362,7 @@ module.exports = async (ctx: PluginContext) => {
       filter: (match: any) =>
         match.date > startOfDay(new Date()) &&
         match.data < endOfDay(new Date()),
-      sort: (a: any, b: any) =>
-        a - b,
+      sort: (a: any, b: any) => a - b,
       limit: 1
     })
 
@@ -360,11 +371,11 @@ module.exports = async (ctx: PluginContext) => {
     }
 
     if (res.data[0]) {
-      gfxState.state = "READY"
+      gfxState.state = 'READY'
       gfxState.teams = res.data[0].teams
       gfxState.bestOf = res.data[0].bestOf
       gfxState.id = res.data[0].id
       gfxState.roundOf = res.data[0].roundOf
-    } 
+    }
   }
-};
+}

@@ -1,6 +1,6 @@
 /**
  * @typedef { import("../types/Team").Team } Team
-*/
+ */
 
 const namespace = 'module-teams'
 /**
@@ -8,9 +8,21 @@ const namespace = 'module-teams'
  */
 let teams = []
 
-$('#embed-copy-talk').val(`${location.href}/gfx/talk-gfx.html${window.apiKey !== null ? '?apikey=' + window.apiKey : ''}`)
-$('#embed-copy-in-game').val(`${location.href}/gfx/in-game-gfx.html${window.apiKey !== null ? '?apikey=' + window.apiKey : ''}`)
-$('#embed-copy-pause').val(`${location.href}/gfx/pause-gfx.html${window.apiKey !== null ? '?apikey=' + window.apiKey : ''}`)
+$('#embed-copy-talk').val(
+  `${location.href}/gfx/talk-gfx.html${
+    window.apiKey !== null ? '?apikey=' + window.apiKey : ''
+  }`
+)
+$('#embed-copy-in-game').val(
+  `${location.href}/gfx/in-game-gfx.html${
+    window.apiKey !== null ? '?apikey=' + window.apiKey : ''
+  }`
+)
+$('#embed-copy-pause').val(
+  `${location.href}/gfx/pause-gfx.html${
+    window.apiKey !== null ? '?apikey=' + window.apiKey : ''
+  }`
+)
 
 $('#team-form').on('submit', (e) => {
   e.preventDefault()
@@ -50,7 +62,7 @@ $('#team-form').on('submit', (e) => {
   addTeam(redTeam)
 })
 
-function swop () {
+function swop() {
   window.LPTE.emit({
     meta: {
       namespace,
@@ -76,7 +88,7 @@ function unset() {
       namespace,
       type: 'unset',
       version: 1
-    },
+    }
   })
 
   $('#blue-team-name').val('')
@@ -97,7 +109,7 @@ function unset() {
   $('#round-of').val(2)
 }
 
-async function initUi () {
+async function initUi() {
   const data = await window.LPTE.request({
     meta: {
       namespace,
@@ -120,7 +132,7 @@ async function initUi () {
   displayTeamList(teamsData)
 }
 
-async function displayData (data) {
+async function displayData(data) {
   $('#blue-team-name').val(data.teams.blueTeam?.name || '')
   $('#blue-team-tag').val(data.teams.blueTeam?.tag || '')
   $('#blue-team-score').val(data.teams.blueTeam?.score || 0)
@@ -150,12 +162,12 @@ window.LPTE.onready(() => {
 
 const teamTableBody = document.querySelector('#team-table')
 
-function displayTeamTable (data) {
+function displayTeamTable(data) {
   teamTableBody.innerHTML = ''
 
   if (data.teams === undefined) return
 
-  data.teams.forEach(t => {
+  data.teams.forEach((t) => {
     const row = document.createElement('tr')
 
     const logoTd = document.createElement('td')
@@ -204,7 +216,7 @@ function displayTeamTable (data) {
   })
 }
 
-function deleteTeam (id) {
+function deleteTeam(id) {
   window.LPTE.emit({
     meta: {
       namespace,
@@ -215,9 +227,9 @@ function deleteTeam (id) {
   })
 }
 
-const teamList = document.getElementById('teams');
+const teamList = document.getElementById('teams')
 
-function displayTeamList (data) {
+function displayTeamList(data) {
   if (data.teams === undefined) return
 
   teams = data.teams
@@ -242,15 +254,18 @@ $('#red-team-name').on('input', (e) => {
 })
 
 /**
- * @param {string} name 
- * @param {string} team 
+ * @param {string} name
+ * @param {string} team
  */
-function setTeam (name, team) {
-  const teamData = teams.find(t => t.name === name)
+function setTeam(name, team) {
+  const teamData = teams.find((t) => t.name === name)
 
   if (teamData === undefined) return
 
-  $(`#${team}-team-logo-preview`).attr('src', '/pages/op-module-teams/img/' + teamData.logo)
+  $(`#${team}-team-logo-preview`).attr(
+    'src',
+    '/pages/op-module-teams/img/' + teamData.logo
+  )
   $(`#${team}-team-tag`).val(teamData.tag)
   $(`#${team}-team-color`).val(teamData.color)
   $(`#${team}-team-standing`).val(teamData.standing)
@@ -278,8 +293,8 @@ $('#add-team-form').on('submit', (e) => {
 /**
  * @param {Team} team
  */
-async function addTeam (team) {
-  const find = teams.find(t => t.name === team.name)
+async function addTeam(team) {
+  const find = teams.find((t) => t.name === team.name)
 
   if (find !== undefined) return
 
@@ -303,7 +318,9 @@ $('#blue-team-logo').on('change', (e) => {
   if (!files.length || !window.FileReader) return
 
   if (/^image/.test(files[0].type)) {
-    document.querySelector('#blue-team-logo-preview').src = URL.createObjectURL(files[0])
+    document.querySelector('#blue-team-logo-preview').src = URL.createObjectURL(
+      files[0]
+    )
   }
 })
 $('#red-team-logo').on('change', (e) => {
@@ -311,11 +328,13 @@ $('#red-team-logo').on('change', (e) => {
   if (!files.length || !window.FileReader) return
 
   if (/^image/.test(files[0].type)) {
-    document.querySelector('#red-team-logo-preview').src = URL.createObjectURL(files[0])
+    document.querySelector('#red-team-logo-preview').src = URL.createObjectURL(
+      files[0]
+    )
   }
 })
 
-async function updateFile (file, name) {
+async function updateFile(file, name) {
   if (!file) return
 
   const ext = file.name.split('.').pop()
