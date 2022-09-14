@@ -2,51 +2,34 @@
  * @typedef { import("../types/Team").Team } Team
  */
 
-const namespace = 'module-teams'
 /**
  * @type {Team[]}
  */
 let teams = []
 
-$('#embed-copy-talk').val(
-  `${location.href}/gfx/talk-gfx.html${
-    window.apiKey !== null ? '?apikey=' + window.apiKey : ''
-  }`
-)
-$('#embed-copy-in-game').val(
-  `${location.href}/gfx/in-game-gfx.html${
-    window.apiKey !== null ? '?apikey=' + window.apiKey : ''
-  }`
-)
-$('#embed-copy-pause').val(
-  `${location.href}/gfx/pause-gfx.html${
-    window.apiKey !== null ? '?apikey=' + window.apiKey : ''
-  }`
-)
-
-$('#team-form').on('submit', (e) => {
+document.querySelector('#team-form').addEventListener('submit', (e) => {
   e.preventDefault()
 
   const blueTeam = {
-    name: $('#blue-team-name').val(),
-    tag: $('#blue-team-tag').val(),
-    score: parseInt($('#blue-team-score').val()),
-    logo: $('#blue-team-logo-preview').attr('src'),
-    color: $('#blue-team-color').val(),
-    standing: $('#blue-team-standing').val()
+    name: document.querySelector('#blue-team-name').value,
+    tag: document.querySelector('#blue-team-tag').value,
+    score: parseInt(document.querySelector('#blue-team-score').value),
+    logo: document.querySelector('#blue-team-logo-preview').src,
+    color: document.querySelector('#blue-team-color').value,
+    standing: document.querySelector('#blue-team-standing').value
   }
   const redTeam = {
-    name: $('#red-team-name').val(),
-    tag: $('#red-team-tag').val(),
-    score: parseInt($('#red-team-score').val()),
-    logo: $('#red-team-logo-preview').attr('src'),
-    color: $('#red-team-color').val(),
-    standing: $('#red-team-standing').val()
+    name: document.querySelector('#red-team-name').value,
+    tag: document.querySelector('#red-team-tag').value,
+    score: parseInt(document.querySelector('#red-team-score').value),
+    logo: document.querySelector('#red-team-logo-preview').src,
+    color: document.querySelector('#red-team-color').value,
+    standing: document.querySelector('#red-team-standing').value
   }
 
   window.LPTE.emit({
     meta: {
-      namespace,
+      namespace: 'module-teams',
       type: 'set',
       version: 1
     },
@@ -54,8 +37,8 @@ $('#team-form').on('submit', (e) => {
       blueTeam,
       redTeam
     },
-    bestOf: parseInt($('#best-of').val()),
-    roundOf: parseInt($('#round-of').val())
+    bestOf: parseInt(document.querySelector('#best-of').value),
+    roundOf: parseInt(document.querySelector('#round-of').value)
   })
 
   addTeam(blueTeam)
@@ -65,7 +48,7 @@ $('#team-form').on('submit', (e) => {
 function swop() {
   window.LPTE.emit({
     meta: {
-      namespace,
+      namespace: 'module-teams',
       type: 'swop',
       version: 1
     }
@@ -75,7 +58,7 @@ function swop() {
 function clearMatches() {
   window.LPTE.emit({
     meta: {
-      namespace,
+      namespace: 'module-teams',
       type: 'clear-matches',
       version: 1
     }
@@ -85,34 +68,48 @@ function clearMatches() {
 function unset() {
   window.LPTE.emit({
     meta: {
-      namespace,
+      namespace: 'module-teams',
       type: 'unset',
       version: 1
     }
   })
 
-  $('#blue-team-name').val('')
-  $('#blue-team-tag').val('')
-  $('#blue-team-score').val(0)
-  $('#blue-team-logo').val('')
-  $('#blue-team-logo-preview').attr('src', '')
-  $('#blue-team-color').val('#000000')
-  $('#blue-team-standing').val('')
-  $('#red-team-name').val('')
-  $('#red-team-tag').val('')
-  $('#red-team-score').val(0)
-  $('#red-team-logo').val('')
-  $('#red-team-logo-preview').attr('src', '')
-  $('#red-team-color').val('#000000')
-  $('#red-team-standing').val('')
-  $('#best-of').val(1)
-  $('#round-of').val(2)
+  document.querySelector('#blue-team-name').value = ''
+  document.querySelector('#blue-team-tag').value = ''
+  document.querySelector('#blue-team-score').value = 0
+  document.querySelector('#blue-team-logo').value = ''
+  document.querySelector('#blue-team-logo-preview').src = ''
+  document.querySelector('#blue-team-color').value = '#000000'
+  document.querySelector('#blue-team-standing').value = ''
+  document.querySelector('#red-team-name').value = ''
+  document.querySelector('#red-team-tag').value = ''
+  document.querySelector('#red-team-score').value = 0
+  document.querySelector('#red-team-logo').value = ''
+  document.querySelector('#red-team-logo-preview').src = ''
+  document.querySelector('#red-team-color').value = '#000000'
+  document.querySelector('#red-team-standing').value = ''
+  document.querySelector('#best-of').value = 1
+  document.querySelector('#round-of').value = 2
 }
 
 async function initUi() {
+  const port =  await window.constants.getWebServerPort()
+  const location = `http://localhost:${port}/pages/op-module-teams/gfx`
+
+  const apiKey =  await window.constants.getApiKey()
+
+  document.querySelector('#embed-copy-talk').value = `${location}/talk-gfx.html${apiKey !== null ? '?apikey=' + apiKey : ''}`
+  document.querySelector('#talk-gfx').src = `${location}/talk-gfx.html${apiKey !== null ? '?apikey=' + apiKey : ''}`
+
+  document.querySelector('#embed-copy-in-game').value = `${location}/in-game-gfx.html${apiKey !== null ? '?apikey=' + apiKey : ''}`
+  document.querySelector('#in-game-gfx').src = `${location}/in-game-gfx.html${apiKey !== null ? '?apikey=' + apiKey : ''}`
+
+  document.querySelector('#embed-copy-pause').value = `${location}/pause-gfx.html${apiKey !== null ? '?apikey=' + apiKey : ''}`
+  document.querySelector('#pause-gfx').src = `${location}/pause-gfx.html${apiKey !== null ? '?apikey=' + apiKey : ''}`
+
   const data = await window.LPTE.request({
     meta: {
-      namespace,
+      namespace: 'module-teams',
       type: 'request-current',
       version: 1
     }
@@ -122,7 +119,7 @@ async function initUi() {
 
   const teamsData = await window.LPTE.request({
     meta: {
-      namespace,
+      namespace: 'module-teams',
       type: 'request-teams',
       version: 1
     }
@@ -133,28 +130,28 @@ async function initUi() {
 }
 
 async function displayData(data) {
-  $('#blue-team-name').val(data.teams.blueTeam?.name || '')
-  $('#blue-team-tag').val(data.teams.blueTeam?.tag || '')
-  $('#blue-team-score').val(data.teams.blueTeam?.score || 0)
-  $('#blue-team-logo-preview').attr('src', data.teams.blueTeam?.logo || '')
-  $('#blue-team-color').val(data.teams.blueTeam?.color || '#000000')
-  $('#blue-team-standing').val(data.teams.blueTeam?.standing || '')
+  document.querySelector('#blue-team-name').value = data.teams.blueTeam?.name || ''
+  document.querySelector('#blue-team-tag').value = data.teams.blueTeam?.tag || ''
+  document.querySelector('#blue-team-score').value = data.teams.blueTeam?.score || 0
+  document.querySelector('#blue-team-logo-preview').src = data.teams.blueTeam?.logo || ''
+  document.querySelector('#blue-team-color').value = data.teams.blueTeam?.color || '#000000'
+  document.querySelector('#blue-team-standing').value = data.teams.blueTeam?.standing || ''
 
-  $('#red-team-name').val(data.teams.redTeam?.name || '')
-  $('#red-team-tag').val(data.teams.redTeam?.tag || '')
-  $('#red-team-score').val(data.teams.redTeam?.score || 0)
-  $('#red-team-logo-preview').attr('src', data.teams.redTeam?.logo || '')
-  $('#red-team-color').val(data.teams.redTeam?.color || '#000000')
-  $('#red-team-standing').val(data.teams.redTeam?.standing || '')
+  document.querySelector('#red-team-name').value = data.teams.redTeam?.name || ''
+  document.querySelector('#red-team-tag').value = data.teams.redTeam?.tag || ''
+  document.querySelector('#red-team-score').value = data.teams.redTeam?.score || 0
+  document.querySelector('#red-team-logo-preview').src = data.teams.redTeam?.logo || ''
+  document.querySelector('#red-team-color').value = data.teams.redTeam?.color || '#000000'
+  document.querySelector('#red-team-standing').value = data.teams.redTeam?.standing || ''
 
-  $('#best-of').val(data.bestOf)
-  $('#round-of').val(data.roundOf)
+  document.querySelector('#best-of').value = data.bestOf
+  document.querySelector('#round-of').value = data.roundOf
 }
 
 window.LPTE.onready(() => {
   initUi()
-  window.LPTE.on(namespace, 'update', displayData)
-  window.LPTE.on(namespace, 'update-teams-set', (data) => {
+  window.LPTE.on('module-teams', 'update', displayData)
+  window.LPTE.on('module-teams', 'update-teams-set', (data) => {
     displayTeamTable(data)
     displayTeamList(data)
   })
@@ -219,7 +216,7 @@ function displayTeamTable(data) {
 function deleteTeam(id) {
   window.LPTE.emit({
     meta: {
-      namespace,
+      namespace: 'module-teams',
       type: 'delete-team',
       version: 1
     },
@@ -246,10 +243,10 @@ function displayTeamList(data) {
   })
 }
 
-$('#blue-team-name').on('input', (e) => {
+document.querySelector('#blue-team-name').addEventListener('input', (e) => {
   setTeam(e.target.value, 'blue')
 })
-$('#red-team-name').on('input', (e) => {
+document.querySelector('#red-team-name').addEventListener('input', (e) => {
   setTeam(e.target.value, 'red')
 })
 
@@ -262,32 +259,29 @@ function setTeam(name, team) {
 
   if (teamData === undefined) return
 
-  $(`#${team}-team-logo-preview`).attr(
-    'src',
-    '/pages/op-module-teams/img/' + teamData.logo
-  )
-  $(`#${team}-team-tag`).val(teamData.tag)
-  $(`#${team}-team-color`).val(teamData.color)
-  $(`#${team}-team-standing`).val(teamData.standing)
+  document.querySelector(`#${team}-team-logo-preview`).src = '/pages/op-module-teams/img/' + teamData.logo
+  document.querySelector(`#${team}-team-tag`).value = teamData.tag
+  document.querySelector(`#${team}-team-color`).value = teamData.color
+  document.querySelector(`#${team}-team-standing`).value = teamData.standing
 }
 
-$('#add-team-form').on('submit', (e) => {
+document.querySelector('#add-team-form').addEventListener('submit', (e) => {
   e.preventDefault()
   console.log(e)
 
   addTeam({
-    logo: $('#logo')[0],
-    name: $('#name').val(),
-    tag: $('#tag').val(),
-    color: $('#color').val(),
-    standing: $('#standing').val()
+    logo: document.querySelector('#logo'),
+    name: document.querySelector('#name').value,
+    tag: document.querySelector('#tag').value,
+    color: document.querySelector('#color').value,
+    standing: document.querySelector('#standing').value
   })
 
-  $('#logo').val('')
-  $('#name').val('')
-  $('#tag').val('')
-  $('#color').val('#000000')
-  $('#standing').val('')
+  document.querySelector('#logo').value = ''
+  document.querySelector('#name').value = ''
+  document.querySelector('#tag').value = ''
+  document.querySelector('#color').value = '#000000'
+  document.querySelector('#standing').value = ''
 })
 
 /**
@@ -298,14 +292,14 @@ async function addTeam(team) {
 
   if (find !== undefined) return
 
-  if (team.logo !== undefined) {
-    const upload = await updateFile(team.logo.files[0], $('#name').val())
+  if (team.logo !== undefined && typeof team.logo !== 'string') {
+    const upload = await updateFile(team.logo.files[0], document.querySelector('#name').value)
     team.logo = upload?.data.name
   }
 
   window.LPTE.emit({
     meta: {
-      namespace,
+      namespace: 'module-teams',
       type: 'add-team',
       version: 1
     },
@@ -313,7 +307,7 @@ async function addTeam(team) {
   })
 }
 
-$('#blue-team-logo').on('change', (e) => {
+document.querySelector('#blue-team-logo').addEventListener('change', (e) => {
   const files = e.target.files ?? []
   if (!files.length || !window.FileReader) return
 
@@ -323,7 +317,7 @@ $('#blue-team-logo').on('change', (e) => {
     )
   }
 })
-$('#red-team-logo').on('change', (e) => {
+document.querySelector('#red-team-logo').addEventListener('change', (e) => {
   const files = e.target.files ?? []
   if (!files.length || !window.FileReader) return
 
