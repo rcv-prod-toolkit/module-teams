@@ -16,7 +16,8 @@ document.querySelector('#team-form').addEventListener('submit', (e) => {
     score: parseInt(document.querySelector('#blue-team-score').value),
     logo: document.querySelector('#blue-team-logo-preview').src,
     color: document.querySelector('#blue-team-color').value,
-    standing: document.querySelector('#blue-team-standing').value
+    standing: document.querySelector('#blue-team-standing').value,
+    coach: document.querySelector('#blue-team-coach').value
   }
   const redTeam = {
     name: document.querySelector('#red-team-name').value,
@@ -24,7 +25,8 @@ document.querySelector('#team-form').addEventListener('submit', (e) => {
     score: parseInt(document.querySelector('#red-team-score').value),
     logo: document.querySelector('#red-team-logo-preview').src,
     color: document.querySelector('#red-team-color').value,
-    standing: document.querySelector('#red-team-standing').value
+    standing: document.querySelector('#red-team-standing').value,
+    coach: document.querySelector('#red-team-coach').value
   }
 
   window.LPTE.emit({
@@ -81,6 +83,7 @@ function unset() {
   document.querySelector('#blue-team-logo-preview').src = ''
   document.querySelector('#blue-team-color').value = '#000000'
   document.querySelector('#blue-team-standing').value = ''
+  document.querySelector('#blue-team-coach').value = ''
   document.querySelector('#red-team-name').value = ''
   document.querySelector('#red-team-tag').value = ''
   document.querySelector('#red-team-score').value = 0
@@ -88,6 +91,7 @@ function unset() {
   document.querySelector('#red-team-logo-preview').src = ''
   document.querySelector('#red-team-color').value = '#000000'
   document.querySelector('#red-team-standing').value = ''
+  document.querySelector('#red-team-coach').value = ''
   document.querySelector('#best-of').value = 1
   document.querySelector('#round-of').value = 2
 }
@@ -136,6 +140,7 @@ async function displayData(data) {
   document.querySelector('#blue-team-logo-preview').src = data.teams.blueTeam?.logo || ''
   document.querySelector('#blue-team-color').value = data.teams.blueTeam?.color || '#000000'
   document.querySelector('#blue-team-standing').value = data.teams.blueTeam?.standing || ''
+  document.querySelector('#blue-team-coach').value = data.teams.blueTeam?.coach || ''
 
   document.querySelector('#red-team-name').value = data.teams.redTeam?.name || ''
   document.querySelector('#red-team-tag').value = data.teams.redTeam?.tag || ''
@@ -143,6 +148,7 @@ async function displayData(data) {
   document.querySelector('#red-team-logo-preview').src = data.teams.redTeam?.logo || ''
   document.querySelector('#red-team-color').value = data.teams.redTeam?.color || '#000000'
   document.querySelector('#red-team-standing').value = data.teams.redTeam?.standing || ''
+  document.querySelector('#red-team-coach').value = data.teams.redTeam?.coach || ''
 
   document.querySelector('#best-of').value = data.bestOf
   document.querySelector('#round-of').value = data.roundOf
@@ -263,6 +269,7 @@ function setTeam(name, team) {
   document.querySelector(`#${team}-team-tag`).value = teamData.tag
   document.querySelector(`#${team}-team-color`).value = teamData.color
   document.querySelector(`#${team}-team-standing`).value = teamData.standing
+  document.querySelector(`#${team}-team-coach`).value = teamData.coach
 }
 
 document.querySelector('#add-team-form').addEventListener('submit', (e) => {
@@ -274,7 +281,8 @@ document.querySelector('#add-team-form').addEventListener('submit', (e) => {
     name: document.querySelector('#name').value,
     tag: document.querySelector('#tag').value,
     color: document.querySelector('#color').value,
-    standing: document.querySelector('#standing').value
+    standing: document.querySelector('#standing').value,
+    coach: document.querySelector('#coach').value
   })
 
   document.querySelector('#logo').value = ''
@@ -282,6 +290,7 @@ document.querySelector('#add-team-form').addEventListener('submit', (e) => {
   document.querySelector('#tag').value = ''
   document.querySelector('#color').value = '#000000'
   document.querySelector('#standing').value = ''
+  document.querySelector('#coach').value = ''
 })
 
 /**

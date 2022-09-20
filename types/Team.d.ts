@@ -5,4 +5,5 @@ export interface Team {
   logo?: string
   color?: string
   standing?: string
+  coach?: string
 }

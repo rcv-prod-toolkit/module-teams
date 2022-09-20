@@ -286,7 +286,8 @@ module.exports = async (ctx: PluginContext) => {
         name: e.name,
         tag: e.tag,
         color: e.color,
-        standing: e.standing
+        standing: e.standing,
+        coach: e.coach
       }
     })
 
