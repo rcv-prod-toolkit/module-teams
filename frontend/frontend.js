@@ -97,19 +97,37 @@ function unset() {
 }
 
 async function initUi() {
-  const port =  await window.constants.getWebServerPort()
-  const location = `http://localhost:${port}/pages/op-module-teams/gfx`
+  const server = await window.constants.getWebServerPort()
+  const location = `http://${server}/pages/op-module-teams/gfx`
 
-  const apiKey =  await window.constants.getApiKey()
+  const apiKey = await window.constants.getApiKey()
 
-  document.querySelector('#embed-copy-talk').value = `${location}/talk-gfx.html${apiKey !== null ? '?apikey=' + apiKey : ''}`
-  document.querySelector('#talk-gfx').src = `${location}/talk-gfx.html${apiKey !== null ? '?apikey=' + apiKey : ''}`
+  document.querySelector(
+    '#embed-copy-talk'
+  ).value = `${location}/talk-gfx.html${
+    apiKey !== null ? '?apikey=' + apiKey : ''
+  }`
+  document.querySelector('#talk-gfx').src = `${location}/talk-gfx.html${
+    apiKey !== null ? '?apikey=' + apiKey : ''
+  }`
 
-  document.querySelector('#embed-copy-in-game').value = `${location}/in-game-gfx.html${apiKey !== null ? '?apikey=' + apiKey : ''}`
-  document.querySelector('#in-game-gfx').src = `${location}/in-game-gfx.html${apiKey !== null ? '?apikey=' + apiKey : ''}`
+  document.querySelector(
+    '#embed-copy-in-game'
+  ).value = `${location}/in-game-gfx.html${
+    apiKey !== null ? '?apikey=' + apiKey : ''
+  }`
+  document.querySelector('#in-game-gfx').src = `${location}/in-game-gfx.html${
+    apiKey !== null ? '?apikey=' + apiKey : ''
+  }`
 
-  document.querySelector('#embed-copy-pause').value = `${location}/pause-gfx.html${apiKey !== null ? '?apikey=' + apiKey : ''}`
-  document.querySelector('#pause-gfx').src = `${location}/pause-gfx.html${apiKey !== null ? '?apikey=' + apiKey : ''}`
+  document.querySelector(
+    '#embed-copy-pause'
+  ).value = `${location}/pause-gfx.html${
+    apiKey !== null ? '?apikey=' + apiKey : ''
+  }`
+  document.querySelector('#pause-gfx').src = `${location}/pause-gfx.html${
+    apiKey !== null ? '?apikey=' + apiKey : ''
+  }`
 
   const data = await window.LPTE.request({
     meta: {
@@ -134,21 +152,34 @@ async function initUi() {
 }
 
 async function displayData(data) {
-  document.querySelector('#blue-team-name').value = data.teams.blueTeam?.name || ''
-  document.querySelector('#blue-team-tag').value = data.teams.blueTeam?.tag || ''
-  document.querySelector('#blue-team-score').value = data.teams.blueTeam?.score || 0
-  document.querySelector('#blue-team-logo-preview').src = data.teams.blueTeam?.logo || ''
-  document.querySelector('#blue-team-color').value = data.teams.blueTeam?.color || '#000000'
-  document.querySelector('#blue-team-standing').value = data.teams.blueTeam?.standing || ''
-  document.querySelector('#blue-team-coach').value = data.teams.blueTeam?.coach || ''
+  document.querySelector('#blue-team-name').value =
+    data.teams.blueTeam?.name || ''
+  document.querySelector('#blue-team-tag').value =
+    data.teams.blueTeam?.tag || ''
+  document.querySelector('#blue-team-score').value =
+    data.teams.blueTeam?.score || 0
+  document.querySelector('#blue-team-logo-preview').src =
+    data.teams.blueTeam?.logo || ''
+  document.querySelector('#blue-team-color').value =
+    data.teams.blueTeam?.color || '#000000'
+  document.querySelector('#blue-team-standing').value =
+    data.teams.blueTeam?.standing || ''
+  document.querySelector('#blue-team-coach').value =
+    data.teams.blueTeam?.coach || ''
 
-  document.querySelector('#red-team-name').value = data.teams.redTeam?.name || ''
+  document.querySelector('#red-team-name').value =
+    data.teams.redTeam?.name || ''
   document.querySelector('#red-team-tag').value = data.teams.redTeam?.tag || ''
-  document.querySelector('#red-team-score').value = data.teams.redTeam?.score || 0
-  document.querySelector('#red-team-logo-preview').src = data.teams.redTeam?.logo || ''
-  document.querySelector('#red-team-color').value = data.teams.redTeam?.color || '#000000'
-  document.querySelector('#red-team-standing').value = data.teams.redTeam?.standing || ''
-  document.querySelector('#red-team-coach').value = data.teams.redTeam?.coach || ''
+  document.querySelector('#red-team-score').value =
+    data.teams.redTeam?.score || 0
+  document.querySelector('#red-team-logo-preview').src =
+    data.teams.redTeam?.logo || ''
+  document.querySelector('#red-team-color').value =
+    data.teams.redTeam?.color || '#000000'
+  document.querySelector('#red-team-standing').value =
+    data.teams.redTeam?.standing || ''
+  document.querySelector('#red-team-coach').value =
+    data.teams.redTeam?.coach || ''
 
   document.querySelector('#best-of').value = data.bestOf
   document.querySelector('#round-of').value = data.roundOf
@@ -265,7 +296,8 @@ function setTeam(name, team) {
 
   if (teamData === undefined) return
 
-  document.querySelector(`#${team}-team-logo-preview`).src = '/pages/op-module-teams/img/' + teamData.logo
+  document.querySelector(`#${team}-team-logo-preview`).src =
+    '/pages/op-module-teams/img/' + teamData.logo
   document.querySelector(`#${team}-team-tag`).value = teamData.tag
   document.querySelector(`#${team}-team-color`).value = teamData.color
   document.querySelector(`#${team}-team-standing`).value = teamData.standing
@@ -302,7 +334,10 @@ async function addTeam(team) {
   if (find !== undefined) return
 
   if (team.logo !== undefined && typeof team.logo !== 'string') {
-    const upload = await updateFile(team.logo.files[0], document.querySelector('#name').value)
+    const upload = await updateFile(
+      team.logo.files[0],
+      document.querySelector('#name').value
+    )
     team.logo = upload?.data.name
   }
 
