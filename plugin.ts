@@ -1,6 +1,6 @@
 import type { PluginContext } from '@rcv-prod-toolkit/types'
 import type { GfxState } from './types/GfxState'
-import util from 'util'
+import { isDeepStrictEqual } from 'util'
 import endOfDay from 'date-fns/endOfDay'
 import startOfDay from 'date-fns/startOfDay'
 
@@ -56,8 +56,8 @@ module.exports = async (ctx: PluginContext) => {
       },
       collection: 'match',
       filter: (match: any) =>
-        match.date > startOfDay(new Date()) &&
-        match.data < endOfDay(new Date()),
+        match.date >= startOfDay(new Date()).getTime() &&
+        match.date <= endOfDay(new Date()).getTime(),
       sort: (a: any, b: any) => a - b
     })
 
@@ -73,7 +73,7 @@ module.exports = async (ctx: PluginContext) => {
 
   ctx.LPTE.on(namespace, 'set', async (e: any) => {
     if (
-      util.isDeepStrictEqual(gfxState.teams, e.teams) &&
+      isDeepStrictEqual(gfxState.teams, e.teams) &&
       gfxState.bestOf == e.bestOf &&
       gfxState.roundOf == e.roundOf
     )
@@ -136,7 +136,7 @@ module.exports = async (ctx: PluginContext) => {
           },
           bestOf: e.bestOf,
           roundOf: e.roundOf,
-          date: new Date()
+          date: new Date().getTime()
         }
       })
 
@@ -361,8 +361,8 @@ module.exports = async (ctx: PluginContext) => {
       },
       collection: 'match',
       filter: (match: any) =>
-        match.date > startOfDay(new Date()) &&
-        match.data < endOfDay(new Date()),
+        match.date >= startOfDay(new Date()).getTime() &&
+        match.date <= endOfDay(new Date()).getTime(),
       sort: (a: any, b: any) => a - b,
       limit: 1
     })
