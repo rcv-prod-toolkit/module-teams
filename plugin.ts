@@ -350,8 +350,6 @@ module.exports = async (ctx: PluginContext) => {
     status: 'RUNNING'
   })
 
-  await ctx.LPTE.await('lpt', 'ready', 150000)
-
   if (gfxState.state == 'NO_MATCH') {
     const res = await ctx.LPTE.request({
       meta: {
