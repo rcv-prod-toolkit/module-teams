@@ -306,7 +306,6 @@ function setTeam(name, team) {
 
 document.querySelector('#add-team-form').addEventListener('submit', (e) => {
   e.preventDefault()
-  console.log(e)
 
   addTeam({
     logo: document.querySelector('#logo'),
