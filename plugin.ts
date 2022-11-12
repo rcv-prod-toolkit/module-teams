@@ -1,8 +1,7 @@
 import type { PluginContext } from '@rcv-prod-toolkit/types'
 import type { GfxState } from './types/GfxState'
 import { isDeepStrictEqual } from 'util'
-import endOfDay from 'date-fns/endOfDay'
-import startOfDay from 'date-fns/startOfDay'
+import dayjs from 'dayjs'
 
 const initialState: GfxState = {
   state: 'NO_MATCH',
@@ -56,8 +55,8 @@ module.exports = async (ctx: PluginContext) => {
       },
       collection: 'match',
       filter: (match: any) =>
-        match.date >= startOfDay(new Date()).getTime() &&
-        match.date <= endOfDay(new Date()).getTime(),
+        match.date >= dayjs(new Date()).startOf('day').valueOf() &&
+        match.date <= dayjs(new Date()).endOf('day').valueOf(),
       sort: (a: any, b: any) => a - b
     })
 
@@ -359,8 +358,8 @@ module.exports = async (ctx: PluginContext) => {
       },
       collection: 'match',
       filter: (match: any) =>
-        match.date >= startOfDay(new Date()).getTime() &&
-        match.date <= endOfDay(new Date()).getTime(),
+        match.date >= dayjs(new Date()).startOf('day').valueOf() &&
+        match.date <= dayjs(new Date()).endOf('day').valueOf(),
       sort: (a: any, b: any) => a - b,
       limit: 1
     })
