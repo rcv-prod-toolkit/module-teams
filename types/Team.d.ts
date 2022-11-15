@@ -6,4 +6,5 @@ export interface Team {
   color?: string
   standing?: string
   coach?: string
+  id: string
 }

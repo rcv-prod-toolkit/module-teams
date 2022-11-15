@@ -314,6 +314,49 @@ module.exports = async (ctx: PluginContext) => {
     })
   })
 
+  ctx.LPTE.on(namespace, 'update-team', async (e: any) => {
+    await ctx.LPTE.request({
+      meta: {
+        type: 'updateOne',
+        namespace: 'plugin-database',
+        version: 1
+      },
+      collection: 'team',
+      id: e.id,
+      data: {
+        logo: e.logo,
+        name: e.name,
+        tag: e.tag,
+        color: e.color,
+        standing: e.standing,
+        coach: e.coach
+      }
+    })
+
+    const res = await ctx.LPTE.request({
+      meta: {
+        type: 'request',
+        namespace: 'plugin-database',
+        version: 1
+      },
+      collection: 'team',
+      limit: 30
+    })
+
+    if (res === undefined || res.data === undefined) {
+      ctx.log.warn('teams could not be loaded')
+    }
+
+    ctx.LPTE.emit({
+      meta: {
+        type: 'update-teams-set',
+        namespace,
+        version: 1
+      },
+      teams: res?.data
+    })
+  })
+
   ctx.LPTE.on(namespace, 'request-teams', async (e: any) => {
     const res = await ctx.LPTE.request({
       meta: {

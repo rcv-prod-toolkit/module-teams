@@ -335,8 +335,6 @@ document.querySelector('#add-team-form').addEventListener('submit', (e) => {
 async function addTeam(team) {
   const find = teams.find((t) => t.name === team.name)
 
-  if (find !== undefined) return
-
   if (team.logo !== undefined && typeof team.logo !== 'string') {
     const upload = await updateFile(
       team.logo.files[0],
@@ -348,9 +346,10 @@ async function addTeam(team) {
   window.LPTE.emit({
     meta: {
       namespace: 'module-teams',
-      type: 'add-team',
+      type: find !== undefined ? 'update-team' : 'add-team',
       version: 1
     },
+    id: find?.id,
     ...team
   })
 }
