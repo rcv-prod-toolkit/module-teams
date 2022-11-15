@@ -205,9 +205,9 @@ function displayTeamTable(data) {
     const row = document.createElement('tr')
 
     const logoTd = document.createElement('td')
-    if (t.logo !== undefined) {
+    if (t.logo !== undefined && t.logo !== '') {
       const logo = document.createElement('img')
-      logo.src = '/pages/op-module-teams/img/' + t.logo
+      logo.src = t.logo
       logo.height = 50
       logoTd.appendChild(logo)
     }
@@ -236,10 +236,15 @@ function displayTeamTable(data) {
     standingTd.innerText = t.standing ?? ''
     row.appendChild(standingTd)
 
+    const coachTd = document.createElement('td')
+    coachTd.innerText = t.coach ?? ''
+    row.appendChild(coachTd)
+
     const deleteTd = document.createElement('td')
     const deleteBtn = document.createElement('button')
     deleteBtn.classList.add('btn', 'btn-danger')
     deleteBtn.innerHTML = '<i class="fas fa-trash-alt"></i>'
+    deleteBtn.title = 'Delete Team'
     deleteBtn.onclick = () => {
       deleteTeam(t.id)
     }

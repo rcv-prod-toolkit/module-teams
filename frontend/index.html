@@ -69,157 +69,212 @@
 
   <div style="display: flex; width: 100%">
     <div id="blue-team" style="display: flex; flex-grow: 1">
-      <input
-        style="flex-grow: 1"
-        type="text"
-        placeholder="Name"
-        id="blue-team-name"
-        required
-        list="teams"
-        class="form-control"
-      />
-      <input
-        style="width: 5rem; margin-left: 1rem"
-        placeholder="Tag"
-        type="text"
-        id="blue-team-tag"
-        required
-        class="form-control"
-      />
-      <input
-        style="width: 5rem; margin-left: 1rem; text-align: center"
-        value="0"
-        type="number"
-        id="blue-team-score"
-        min="0"
-        max="3"
-        required
-        class="form-control"
-      />
+      <div class="form-group" style="flex-grow: 1">
+        <label for="blue-team-name">Name</label>
+        <input
+          type="text"
+          placeholder="Name"
+          id="blue-team-name"
+          required
+          list="teams"
+          class="form-control"
+        />
+      </div>
+      <div class="form-group" style="width: 5rem; margin-left: 1rem">
+        <label for="blue-team-tag">Tag</label>
+        <input
+          placeholder="Tag"
+          type="text"
+          id="blue-team-tag"
+          required
+          class="form-control"
+        />
+      </div>
+      <div class="form-group" style="width: 4rem; margin-left: 1rem">
+        <label for="blue-team-score">Score</label>
+        <input
+          value="0"
+          type="number"
+          id="blue-team-score"
+          min="0"
+          max="3"
+          required
+          class="form-control"
+        />
+      </div>
     </div>
 
-    <div style="margin: 0 1rem">
-      <input
-        style="height: 100%; flex-grow: 1; text-align: center"
-        value="1"
-        type="number"
-        id="best-of"
-        min="1"
-        max="5"
-        class="form-control"
-        required
-      />
+    <div class="ml-5 mr-3">
+      <div class="form-group text-center" style="height: 100%; width: 5rem">
+        <label for="best-of">Best of</label>
+        <input
+          value="1"
+          type="number"
+          id="best-of"
+          min="1"
+          max="5"
+          class="form-control"
+          required
+        />
+      </div>
     </div>
 
-    <div style="margin-right: 1rem">
-      <select
-        id="round-of"
-        style="height: 100%; flex-grow: 1"
-        required
-        class="form-control"
-      >
-        <option value="2">FINALS</option>
-        <option value="4">SEMI FINALS</option>
-        <option value="8">QUARTER FINALS</option>
-        <option value="16">ROUND OF 16</option>
-        <option value="32">ROUND OF 32</option>
-        <option value="64">ROUND OF 64</option>
-        <option value="128">ROUND OF 128</option>
-        <option value="256">ROUND OF 256</option>
-        <option value="512">ROUND OF 512</option>
-        <option value="1024">ROUND OF 1024</option>
-        <option value="2048">ROUND OF 2048</option>
-        <option value="2048">GRAND FINAL 1</option>
-        <option value="2048">GRAND FINAL 2</option>
-      </select>
+    <div class="mr-5">
+      <div class="form-group text-center" style="height: 100%; width: 8rem">
+        <label for="round-of">Round</label>
+        <select id="round-of" required class="form-control">
+          <option value="2">FINALS</option>
+          <option value="4">SEMI FINALS</option>
+          <option value="8">QUARTER FINALS</option>
+          <option value="16">ROUND OF 16</option>
+          <option value="32">ROUND OF 32</option>
+          <option value="64">ROUND OF 64</option>
+          <option value="128">ROUND OF 128</option>
+          <option value="256">ROUND OF 256</option>
+          <option value="512">ROUND OF 512</option>
+          <option value="1024">ROUND OF 1024</option>
+          <option value="2048">ROUND OF 2048</option>
+          <option value="2048">GRAND FINAL 1</option>
+          <option value="2048">GRAND FINAL 2</option>
+        </select>
+      </div>
     </div>
 
     <div id="red-team" style="display: flex; flex-grow: 1">
-      <input
-        style="width: 5rem; margin-right: 1rem; text-align: center"
-        value="0"
-        type="number"
-        id="red-team-score"
-        min="0"
-        max="3"
-        class="form-control"
-        required
-      />
-      <input
-        style="width: 5rem; margin-right: 1rem; text-align: right"
-        type="text"
-        placeholder="Tag"
-        class="form-control"
-        id="red-team-tag"
-        required
-      />
-      <input
-        style="flex-grow: 1; text-align: right"
-        class="form-control"
-        type="text"
-        placeholder="Name"
-        id="red-team-name"
-        required
-        list="teams"
-      />
+      <div
+        class="form-group text-right"
+        style="width: 4rem; margin-right: 1rem"
+      >
+        <label for="red-team-score">Score</label>
+        <input
+          value="0"
+          type="number"
+          id="red-team-score"
+          min="0"
+          max="3"
+          class="form-control"
+          required
+        />
+      </div>
+      <div
+        class="form-group text-right"
+        style="width: 5rem; margin-right: 1rem"
+      >
+        <label for="red-team-tag">Tag</label>
+        <input
+          type="text"
+          placeholder="Tag"
+          class="form-control text-right"
+          id="red-team-tag"
+          required
+        />
+      </div>
+      <div class="form-group text-right" style="flex-grow: 1">
+        <label for="red-team-name">Name</label>
+        <input
+          class="form-control text-right"
+          type="text"
+          placeholder="Name"
+          id="red-team-name"
+          required
+          list="teams"
+        />
+      </div>
     </div>
   </div>
 
   <div class="d-flex align-items-center">
     <div
       class="d-flex align-items-center"
-      style="margin-top: 1rem; margin-right: 5rem; gap: 1rem"
+      style="margin-right: 5rem; gap: 1rem"
     >
-      <img id="blue-team-logo-preview" src="#" width="50px" height="50px" />
-      <input
-        type="file"
-        id="blue-team-logo"
-        accept="image/*"
-        class="form-control"
-      />
-      <input
-        type="color"
-        id="blue-team-color"
-        class="form-control form-control-color"
-      />
-      <input
-        type="text"
-        id="blue-team-standing"
-        placeholder="standing"
-        class="flex-grow-1 form-control"
-      />
-      <input
-        type="text"
-        id="blue-team-coach"
-        placeholder="Coach"
-        class="flex-grow-1 form-control"
-      />
+      <img id="blue-team-logo-preview" src="" width="50px" height="50px" />
+      <div class="form-group" style="width: 6rem">
+        <label for="blue-team-logo">Logo</label>
+        <div class="custom-file">
+          <input
+            type="file"
+            class="custom-file-input"
+            id="blue-team-logo"
+            accept="image/*"
+          />
+          <label class="custom-file-label" for="blue-team-logo"
+            >Choose file</label
+          >
+        </div>
+      </div>
+      <div class="form-group" style="width: 6rem">
+        <label for="blue-team-color">Color</label>
+        <input
+          type="color"
+          id="blue-team-color"
+          class="form-control form-control-color"
+        />
+      </div>
+      <div class="form-group" style="width: 5rem">
+        <label for="blue-team-standing">Standing</label>
+        <input
+          type="text"
+          id="blue-team-standing"
+          placeholder="0-0"
+          class="flex-grow-1 form-control"
+        />
+      </div>
+      <div class="form-group">
+        <label for="blue-team-coach">Coach</label>
+        <input
+          type="text"
+          id="blue-team-coach"
+          placeholder="Coach"
+          class="flex-grow-1 form-control"
+        />
+      </div>
     </div>
-    <div class="d-flex flex-row-reverse" style="margin-top: 1rem; gap: 1rem">
-      <img id="red-team-logo-preview" src="#" width="50px" height="50px" />
-      <input
-        type="file"
-        id="red-team-logo"
-        accept="image/*"
-        class="form-control"
-      />
-      <input
-        type="color"
-        id="red-team-color"
-        class="form-control form-control-color"
-      />
-      <input
-        type="text"
-        id="red-team-standing"
-        placeholder="standing"
-        class="flex-grow-1 form-control"
-      />
+    <div
+      class="d-flex flex-row-reverse align-items-center text-right"
+      style="gap: 1rem"
+    >
+      <img id="red-team-logo-preview" src="" width="50px" height="50px" />
+      <div class="form-group text-right" style="width: 6rem">
+        <label for="red-team-logo">Logo</label>
+        <div class="custom-file">
+          <input
+            type="file"
+            class="custom-file-input"
+            id="red-team-logo"
+            accept="image/*"
+          />
+          <label class="custom-file-label" for="red-team-logo"
+            >Choose file</label
+          >
+        </div>
+      </div>
+      <div class="form-group text-right" style="width: 6rem">
+        <label for="red-team-color">Color</label>
+        <input
+          type="color"
+          id="red-team-color"
+          class="form-control form-control-color"
+        />
+      </div>
+      <div class="form-group text-right" style="width: 5rem">
+        <label for="red-team-standing">Standing</label>
+        <input
+          type="text"
+          id="red-team-standing"
+          placeholder="0-0"
+          class="flex-grow-1 form-control text-right"
+        />
+      </div>
+      <div class="form-group text-right">
+        <label for="red-team-coach">Coach</label>
       <input
         type="text"
         id="red-team-coach"
         placeholder="Coach"
-        class="flex-grow-1 form-control"
+        class="flex-grow-1 form-control text-right"
       />
+    </div>
     </div>
   </div>
 
@@ -274,9 +329,17 @@
 
 <form id="add-team-form" class="mt-5">
   <div class="d-flex" style="gap: 1rem">
-    <div class="form-group">
+    <div class="form-group" style="width: 12rem;">
       <label for="logo">Logo</label>
-      <input type="file" id="logo" accept="image/*" class="form-control" />
+      <div class="custom-file">
+        <input
+          type="file"
+          class="custom-file-input"
+          id="logo"
+          accept="image/*"
+        />
+        <label class="custom-file-label" for="logo">Choose file</label>
+      </div>
     </div>
     <div class="form-group flex-grow-1">
       <label for="name">Name</label>
@@ -299,21 +362,11 @@
     </div>
     <div class="form-group" style="width: 7rem">
       <label for="standing">Standing</label>
-      <input
-        type="text"
-        id="standing"
-        placeholder="standing"
-        class="form-control"
-      />
+      <input type="text" id="standing" placeholder="0-0" class="form-control" />
     </div>
     <div class="form-group" style="width: 7rem">
       <label for="coach">Coach</label>
-      <input
-        type="text"
-        id="coach"
-        placeholder="Coach"
-        class="form-control"
-      />
+      <input type="text" id="coach" placeholder="Coach" class="form-control" />
     </div>
   </div>
   <button type="submit" class="btn btn-success btn-block">Add</button>
