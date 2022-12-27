@@ -382,16 +382,6 @@ module.exports = async (ctx: PluginContext) => {
     })
   })
 
-  // Emit event that we're ready to operate
-  ctx.LPTE.emit({
-    meta: {
-      type: 'plugin-status-change',
-      namespace: 'lpt',
-      version: 1
-    },
-    status: 'RUNNING'
-  })
-
   if (gfxState.state == 'NO_MATCH') {
     const res = await ctx.LPTE.request({
       meta: {
@@ -419,4 +409,26 @@ module.exports = async (ctx: PluginContext) => {
       gfxState.roundOf = res.data[0].roundOf
     }
   }
+
+  ctx.LPTE.emit({
+    meta: {
+      namespace,
+      type: 'teams-loaded',
+      version: 1
+    },
+    state: gfxState.state,
+    teams: gfxState.teams,
+    bestOf: gfxState.bestOf,
+    roundOf: gfxState.roundOf
+  })
+
+  // Emit event that we're ready to operate
+  ctx.LPTE.emit({
+    meta: {
+      type: 'plugin-status-change',
+      namespace: 'lpt',
+      version: 1
+    },
+    status: 'RUNNING'
+  })
 }
