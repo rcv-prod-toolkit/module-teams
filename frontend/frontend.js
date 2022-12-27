@@ -182,7 +182,6 @@ async function initUi() {
 }
 
 async function displayData(data) {
-  console.log(data)
   document.querySelector('#blue-team-name').value =
     data.teams.blueTeam?.name || ''
   document.querySelector('#blue-team-tag').value =
