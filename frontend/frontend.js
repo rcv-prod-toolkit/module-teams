@@ -14,7 +14,7 @@ document.querySelector('#team-form').addEventListener('submit', (e) => {
     name: document.querySelector('#blue-team-name').value,
     tag: document.querySelector('#blue-team-tag').value,
     score: parseInt(document.querySelector('#blue-team-score').value),
-    logo: document.querySelector('#blue-team-logo-preview').src,
+    logo: document.querySelector('#blue-team-logo'),
     color: document.querySelector('#blue-team-color').value,
     standing: document.querySelector('#blue-team-standing').value,
     coach: document.querySelector('#blue-team-coach').value
@@ -23,7 +23,7 @@ document.querySelector('#team-form').addEventListener('submit', (e) => {
     name: document.querySelector('#red-team-name').value,
     tag: document.querySelector('#red-team-tag').value,
     score: parseInt(document.querySelector('#red-team-score').value),
-    logo: document.querySelector('#red-team-logo-preview').src,
+    logo: document.querySelector('#red-team-logo'),
     color: document.querySelector('#red-team-color').value,
     standing: document.querySelector('#red-team-standing').value,
     coach: document.querySelector('#red-team-coach').value
@@ -36,8 +36,38 @@ document.querySelector('#team-form').addEventListener('submit', (e) => {
       version: 1
     },
     teams: {
-      blueTeam,
-      redTeam
+      blueTeam: {
+        ...blueTeam,
+        logo:
+          blueTeam.logo.files.length > 0
+            ? `${blueTeam.name}.${blueTeam.logo.files[0].name.split('.').pop()}`
+            : document.querySelector('#blue-team-logo-preview').src !== '' &&
+              document.querySelector('#blue-team-logo-preview').src !==
+                undefined &&
+              document.querySelector('#blue-team-logo-preview').src !==
+                location.toString()
+            ? document
+                .querySelector('#blue-team-logo-preview')
+                .src.split('/')
+                .pop()
+            : ''
+      },
+      redTeam: {
+        ...redTeam,
+        logo:
+          redTeam.logo.files.length > 0
+            ? `${redTeam.name}.${redTeam.logo.files[0].name.split('.').pop()}`
+            : document.querySelector('#red-team-logo-preview').src !== '' &&
+              document.querySelector('#red-team-logo-preview').src !==
+                undefined &&
+              document.querySelector('#red-team-logo-preview').src !==
+                location.toString()
+            ? document
+                .querySelector('#red-team-logo-preview')
+                .src.split('/')
+                .pop()
+            : ''
+      }
     },
     bestOf: parseInt(document.querySelector('#best-of').value),
     roundOf: parseInt(document.querySelector('#round-of').value)
@@ -152,6 +182,7 @@ async function initUi() {
 }
 
 async function displayData(data) {
+  console.log(data)
   document.querySelector('#blue-team-name').value =
     data.teams.blueTeam?.name || ''
   document.querySelector('#blue-team-tag').value =
@@ -159,7 +190,9 @@ async function displayData(data) {
   document.querySelector('#blue-team-score').value =
     data.teams.blueTeam?.score || 0
   document.querySelector('#blue-team-logo-preview').src =
-    data.teams.blueTeam?.logo || ''
+    data.teams.blueTeam?.logo !== undefined && data.teams.blueTeam?.logo !== ''
+      ? '/pages/op-module-teams/img/' + data.teams.blueTeam?.logo
+      : ''
   document.querySelector('#blue-team-color').value =
     data.teams.blueTeam?.color || '#000000'
   document.querySelector('#blue-team-standing').value =
@@ -173,7 +206,9 @@ async function displayData(data) {
   document.querySelector('#red-team-score').value =
     data.teams.redTeam?.score || 0
   document.querySelector('#red-team-logo-preview').src =
-    data.teams.redTeam?.logo || ''
+    data.teams.redTeam?.logo !== undefined && data.teams.redTeam?.logo !== ''
+      ? '/pages/op-module-teams/img/' + data.teams.redTeam?.logo
+      : ''
   document.querySelector('#red-team-color').value =
     data.teams.redTeam?.color || '#000000'
   document.querySelector('#red-team-standing').value =
@@ -207,7 +242,7 @@ function displayTeamTable(data) {
     const logoTd = document.createElement('td')
     if (t.logo !== undefined && t.logo !== '') {
       const logo = document.createElement('img')
-      logo.src = t.logo
+      logo.src = '/pages/op-module-teams/img/' + t.logo
       logo.height = 50
       logoTd.appendChild(logo)
     }
@@ -301,8 +336,10 @@ function setTeam(name, team) {
 
   if (teamData === undefined) return
 
-  document.querySelector(`#${team}-team-logo-preview`).src =
-    '/pages/op-module-teams/img/' + teamData.logo
+  if (teamData.logo !== undefined && teamData.logo !== '') {
+    document.querySelector(`#${team}-team-logo-preview`).src =
+      '/pages/op-module-teams/img/' + teamData.logo
+  }
   document.querySelector(`#${team}-team-tag`).value = teamData.tag
   document.querySelector(`#${team}-team-color`).value = teamData.color
   document.querySelector(`#${team}-team-standing`).value = teamData.standing
@@ -336,12 +373,11 @@ async function addTeam(team) {
   const find = teams.find((t) => t.name === team.name)
 
   if (team.logo !== undefined && typeof team.logo !== 'string') {
-    const upload = await updateFile(
-      team.logo.files[0],
-      document.querySelector('#name').value
-    )
+    const upload = await updateFile(team.logo.files[0], team.name)
     team.logo = upload?.data.name
   }
+
+  team.logo = team.logo ?? find.logo
 
   window.LPTE.emit({
     meta: {
