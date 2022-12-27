@@ -376,7 +376,7 @@ async function addTeam(team) {
     team.logo = upload?.data.name
   }
 
-  team.logo = team.logo ?? find.logo
+  team.logo = team.logo ?? find?.logo
 
   window.LPTE.emit({
     meta: {
