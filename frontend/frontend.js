@@ -70,7 +70,8 @@ document.querySelector('#team-form').addEventListener('submit', (e) => {
       }
     },
     bestOf: parseInt(document.querySelector('#best-of').value),
-    roundOf: parseInt(document.querySelector('#round-of').value)
+    roundOf: parseInt(document.querySelector('#round-of').value),
+    tournamentName: document.querySelector('#tournament-name').value
   })
 
   addTeam(blueTeam)
@@ -124,6 +125,7 @@ function unset() {
   document.querySelector('#red-team-coach').value = ''
   document.querySelector('#best-of').value = 1
   document.querySelector('#round-of').value = 2
+  document.querySelector('#tournament-name').value = ''
 }
 
 async function initUi() {
@@ -217,6 +219,7 @@ async function displayData(data) {
 
   document.querySelector('#best-of').value = data.bestOf
   document.querySelector('#round-of').value = data.roundOf
+  document.querySelector('#tournament-name').value = data.tournamentName
 }
 
 window.LPTE.onready(() => {
