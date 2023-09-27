@@ -73,7 +73,6 @@ module.exports = async (ctx: PluginContext) => {
   })
 
   ctx.LPTE.on(namespace, 'set', async (e: any) => {
-    console.log(e, gfxState)
     if (
       isDeepStrictEqual(gfxState.teams, e.teams) &&
       gfxState.bestOf == e.bestOf &&
