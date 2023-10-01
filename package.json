@@ -14,7 +14,7 @@
         "needsBuild": true
     },
     "dependencies": {
-        "dayjs": "^1.11.9"
+        "dayjs": "^1.11.10"
     },
     "devDependencies": {
         "@rcv-prod-toolkit/types": "github:rcv-prod-toolkit/types",
