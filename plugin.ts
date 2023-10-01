@@ -7,7 +7,8 @@ const initialState: GfxState = {
   state: 'NO_MATCH',
   teams: {},
   bestOf: 1,
-  roundOf: 2
+  roundOf: 2,
+  tournamentName: ''
 }
 
 module.exports = async (ctx: PluginContext) => {
@@ -42,7 +43,8 @@ module.exports = async (ctx: PluginContext) => {
       state: gfxState.state,
       teams: gfxState.teams,
       bestOf: gfxState.bestOf,
-      roundOf: gfxState.roundOf
+      roundOf: gfxState.roundOf,
+      tournamentName: gfxState.tournamentName
     })
   })
 
@@ -74,7 +76,8 @@ module.exports = async (ctx: PluginContext) => {
     if (
       isDeepStrictEqual(gfxState.teams, e.teams) &&
       gfxState.bestOf == e.bestOf &&
-      gfxState.roundOf == e.roundOf
+      gfxState.roundOf == e.roundOf &&
+      gfxState.tournamentName == e.tournamentName
     )
       return
 
@@ -96,7 +99,8 @@ module.exports = async (ctx: PluginContext) => {
             redTeam: e.teams.blueTeam
           },
           bestOf: e.bestOf,
-          roundOf: e.roundOf
+          roundOf: e.roundOf,
+          tournamentName: e.tournamentName
         }
       })
     } else if (
@@ -117,7 +121,8 @@ module.exports = async (ctx: PluginContext) => {
             redTeam: e.teams.redTeam
           },
           bestOf: e.bestOf,
-          roundOf: e.roundOf
+          roundOf: e.roundOf,
+          tournamentName: e.tournamentName
         }
       })
     } else {
@@ -135,6 +140,7 @@ module.exports = async (ctx: PluginContext) => {
           },
           bestOf: e.bestOf,
           roundOf: e.roundOf,
+          tournamentName: e.tournamentName,
           date: new Date().getTime()
         }
       })
@@ -149,6 +155,7 @@ module.exports = async (ctx: PluginContext) => {
     gfxState.teams = e.teams
     gfxState.bestOf = e.bestOf
     gfxState.roundOf = e.roundOf
+    gfxState.tournamentName = e.tournamentName
 
     ctx.LPTE.emit({
       meta: {
@@ -159,7 +166,8 @@ module.exports = async (ctx: PluginContext) => {
       state: gfxState.state,
       teams: gfxState.teams,
       bestOf: gfxState.bestOf,
-      roundOf: gfxState.roundOf
+      roundOf: gfxState.roundOf,
+      tournamentName: gfxState.tournamentName
     })
   })
 
@@ -181,7 +189,8 @@ module.exports = async (ctx: PluginContext) => {
       state: gfxState.state,
       teams: gfxState.teams,
       bestOf: gfxState.bestOf,
-      roundOf: gfxState.roundOf
+      roundOf: gfxState.roundOf,
+      tournamentName: gfxState.tournamentName
     })
   })
 
@@ -190,7 +199,8 @@ module.exports = async (ctx: PluginContext) => {
       state: 'NO_MATCH',
       teams: {},
       bestOf: 1,
-      roundOf: 2
+      roundOf: 2,
+      tournamentName: ''
     }
 
     ctx.LPTE.emit({
@@ -202,7 +212,8 @@ module.exports = async (ctx: PluginContext) => {
       state: gfxState.state,
       teams: gfxState.teams,
       bestOf: gfxState.bestOf,
-      roundOf: gfxState.roundOf
+      roundOf: gfxState.roundOf,
+      tournamentName: gfxState.tournamentName
     })
   })
 
@@ -221,7 +232,8 @@ module.exports = async (ctx: PluginContext) => {
       state: 'NO_MATCH',
       teams: {},
       bestOf: 1,
-      roundOf: 2
+      roundOf: 2,
+      tournamentName: ''
     }
 
     ctx.LPTE.emit({
@@ -233,7 +245,8 @@ module.exports = async (ctx: PluginContext) => {
       state: gfxState.state,
       teams: gfxState.teams,
       bestOf: gfxState.bestOf,
-      roundOf: gfxState.roundOf
+      roundOf: gfxState.roundOf,
+      tournamentName: gfxState.tournamentName
     })
   })
 
@@ -419,7 +432,8 @@ module.exports = async (ctx: PluginContext) => {
     state: gfxState.state,
     teams: gfxState.teams,
     bestOf: gfxState.bestOf,
-    roundOf: gfxState.roundOf
+    roundOf: gfxState.roundOf,
+    tournamentName: gfxState.tournamentName
   })
 
   // Emit event that we're ready to operate
