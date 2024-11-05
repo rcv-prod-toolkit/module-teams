@@ -129,8 +129,8 @@ function unset() {
 }
 
 async function initUi() {
-  const server = await window.constants.getWebServerPort()
-  const location = `http://${server}/pages/op-module-teams/gfx`
+  const server = await window.constants.getModuleURL()
+  const location = `${server}/gfx`
 
   const apiKey = await window.constants.getApiKey()
 
